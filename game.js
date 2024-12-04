@@ -182,8 +182,12 @@ class MainScene extends Phaser.Scene {
             if (this.isSwiping) {
                 const diffX = pointer.x - this.startX;
                 const diffY = pointer.y - this.startY;
-                this.cameras.main.scrollX -= diffX * 0.2;
-                this.cameras.main.scrollY -= diffY * 0.2;
+
+                // Скорректируем скорость движения в зависимости от масштаба
+                const zoomFactor = this.cameras.main.zoom;
+                this.cameras.main.scrollX -= diffX * 0.2 * zoomFactor;
+                this.cameras.main.scrollY -= diffY * 0.2 * zoomFactor;
+
                 this.startX = pointer.x;
                 this.startY = pointer.y;
             }
