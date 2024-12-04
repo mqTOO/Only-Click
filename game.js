@@ -35,7 +35,19 @@ class MainScene extends Phaser.Scene {
     }
 
     create() {
-        this.add.image(400, 300, 'background');
+        // Получаем размеры экрана Telegram Mini-App
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+
+        tg.ready();
+        tg.expand();
+        tg.requestFullscreen();
+
+        // Настроим размеры камеры на основе размеров экрана
+        this.cameras.main.setBounds(0, 0, screenWidth, screenHeight);
+        this.cameras.main.setZoom(1);
+
+        this.add.image(400, 300, 'background').setScrollFactor(0);
 
         this.resourceText = this.add.text(10, 10, this.getResourceText(), {
             font: '18px Arial',
@@ -62,6 +74,9 @@ class MainScene extends Phaser.Scene {
                 this.initPinchZoom(pointer);
             }
         });
+
+        // Используем Telegram API для сохранения прогресса
+        this.loadProgress();
     }
 
     createGrid() {
@@ -130,7 +145,7 @@ class MainScene extends Phaser.Scene {
 
             alert(`Select a location for your ${building.name}`);
         } else {
-            alert('Not enough resources!');
+            alert('НЕт ресов!');
         }
     }
 
@@ -223,12 +238,32 @@ class MainScene extends Phaser.Scene {
         }
         return 0;
     }
+
+    // Загрузка прогресса из Telegram API
+    async loadProgress() {
+        try {
+            const data = await window.Telegram.WebApp.getStorageItem('gameProgress');
+            if (data) {
+                const progress = JSON.parse(data);
+                this.resources = progress.resources;
+                progress.buildings.forEach((buildingData) => {
+                    const building = this.availableBuildings.find(b => b.name === buildingData.name);
+                    if (building) {
+                        const newBuilding = this.placeBuilding(buildingData.x, buildingData.y, building);
+                    }
+                });
+                this.resourceText.setText(this.getResourceText());
+            }
+        } catch (error) {
+            console.error('Failed to load progress:', error);
+        }
+    }
 }
 
 const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: window.innerWidth,  // Устанавливаем ширину экрана Telegram Mini-App
+    height: window.innerHeight,  // Устанавливаем высоту экрана Telegram Mini-App
     scene: MainScene,
     scale: {
         mode: Phaser.Scale.FIT,
