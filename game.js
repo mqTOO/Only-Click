@@ -38,9 +38,7 @@ class MainScene extends Phaser.Scene {
         // Получаем размеры экрана Telegram Mini-App
         const screenWidth = window.innerWidth;
         const screenHeight = window.innerHeight;
-
-        tg.ready();
-        tg.expand();
+        
         tg.requestFullscreen();
 
         // Настроим размеры камеры на основе размеров экрана
