@@ -39,7 +39,13 @@ class MainScene extends Phaser.Scene {
         if (window.Telegram && window.Telegram.WebApp) {
             window.Telegram.WebApp.requestFullscreen(); // Включаем полноэкранный режим
         }
+        const tg = window.Telegram.WebApp;
 
+        // Инициализация Telegram Mini-App
+        tg.ready();
+        tg.expand();
+        tg.requestFullscreen();
+        
         // Получаем размеры экрана Telegram Mini-App
         const screenWidth = window.innerWidth;
         const screenHeight = window.innerHeight;
