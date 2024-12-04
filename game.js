@@ -35,6 +35,11 @@ class MainScene extends Phaser.Scene {
     }
 
     create() {
+        // Запрашиваем полноэкранный режим
+        if (window.Telegram && window.Telegram.WebApp) {
+            window.Telegram.WebApp.requestFullscreen(); // Включаем полноэкранный режим
+        }
+
         // Получаем размеры экрана Telegram Mini-App
         const screenWidth = window.innerWidth;
         const screenHeight = window.innerHeight;
@@ -141,7 +146,7 @@ class MainScene extends Phaser.Scene {
 
             alert(`Select a location for your ${building.name}`);
         } else {
-            alert('НЕт ресов!');
+            alert('Not enough resources!');
         }
     }
 
