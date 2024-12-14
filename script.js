@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("coins", coins);
     };
 
+    // Обработчики событий для мобильных устройств и ПК
     clickImage.addEventListener("touchstart", handleClick);
     clickImage.addEventListener("click", handleClick);
 
@@ -50,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const userId = tg.initDataUnsafe.user?.id || "anonymous";
         const userName = tg.initDataUnsafe.user?.username || "Player";
 
-        fetch("https://only-click.onrender.com/update", {
+        fetch("https://your-render-app-url.com/update", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ userId, userName, clicks: coins }),
@@ -66,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Получение топа лидеров
     const fetchLeaderboard = () => {
-        fetch("https://only-click.onrender.com/leaderboard")
+        fetch("https://your-render-app-url.com/leaderboard")
             .then(res => res.json())
             .then(data => {
                 leaderboardElement.innerHTML = "<h2>🏆 Топ кликеров 🏆</h2>";
