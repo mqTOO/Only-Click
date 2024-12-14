@@ -1,71 +1,110 @@
 /* Общие стили */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
     margin: 0;
     padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #141e30, #243b55);
+    color: #fff;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     height: 100vh;
     overflow: hidden;
 }
 
 /* Контейнер */
 .container {
-    width: 100%;
-    max-width: 400px;
-    padding: 10px;
-    box-sizing: border-box;
     text-align: center;
-    background-color: #ffffff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Заголовок */
+header h1 {
+    font-size: 24px;
+    margin: 0;
+    padding: 10px;
+    background: linear-gradient(90deg, #ff8c00, #ff4500);
+    color: #fff;
     border-radius: 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* Монеты */
-p {
-    font-size: 18px;
-    margin: 10px 0;
+.coins-display {
+    font-size: 20px;
+    margin: 20px 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    display: inline-block;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 /* Картинка для кликов */
-#click-area {
-    margin: 15px 0;
+.click-area {
+    position: relative;
+    margin: 20px auto;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle, #ff8c00, #ff4500);
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(255, 69, 0, 0.6);
+    animation: pulse 1.5s infinite;
+    cursor: pointer;
 }
 
 #click-image {
-    width: 100%;
-    max-width: 250px;
-    height: auto;
-    touch-action: manipulation;
+    width: 100px;
+    height: 100px;
     user-select: none;
+    touch-action: manipulation;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 /* Кнопка */
-button {
-    display: block;
-    margin: 10px auto;
+.button {
+    background: linear-gradient(90deg, #1e90ff, #007bff);
+    color: #fff;
+    border: none;
     padding: 12px 20px;
     font-size: 16px;
-    background-color: #007BFF;
-    color: #ffffff;
-    border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 100%;
-    max-width: 250px;
+    box-shadow: 0 3px 10px rgba(0, 123, 255, 0.4);
+    transition: all 0.2s ease-in-out;
 }
 
-button:hover {
-    background-color: #0056b3;
+.button:hover {
+    background: linear-gradient(90deg, #007bff, #1e90ff);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.6);
+    transform: scale(1.05);
 }
 
 /* Реферальная ссылка */
 #referral-link {
-    margin-top: 10px;
+    margin-top: 15px;
     font-size: 14px;
-    color: #007BFF;
+    color: #1e90ff;
     word-wrap: break-word;
+    text-shadow: 0 1px 3px rgba(30, 144, 255, 0.8);
+    cursor: pointer;
 }
