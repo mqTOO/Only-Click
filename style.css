@@ -1,71 +1,51 @@
-/* Общие стили */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 0;
-    padding: 0;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     height: 100vh;
-    overflow: hidden;
+    margin: 0;
+    background-color: #f0f0f0;
 }
 
-/* Контейнер */
-.container {
-    width: 100%;
-    max-width: 400px;
-    padding: 10px;
-    box-sizing: border-box;
+#game {
     text-align: center;
-    background-color: #ffffff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    padding: 20px;
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Монеты */
-p {
-    font-size: 18px;
-    margin: 10px 0;
-}
-
-/* Картинка для кликов */
-#click-area {
-    margin: 15px 0;
+#coins {
+    font-size: 2em;
+    margin-bottom: 20px;
 }
 
 #click-image {
-    width: 100%;
-    max-width: 250px;
-    height: auto;
-    touch-action: manipulation;
-    user-select: none;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: transform 0.2s ease;
 }
 
-/* Кнопка */
+#click-image:hover {
+    transform: scale(1.1);
+}
+
 button {
-    display: block;
-    margin: 10px auto;
-    padding: 12px 20px;
-    font-size: 16px;
-    background-color: #007BFF;
-    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    max-width: 250px;
 }
 
-button:hover {
-    background-color: #0056b3;
-}
-
-/* Реферальная ссылка */
-#referral-link {
+a {
+    display: block;
     margin-top: 10px;
-    font-size: 14px;
-    color: #007BFF;
-    word-wrap: break-word;
+    color: #007bff;
+    text-decoration: none;
 }
