@@ -1,28 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#ffffff">
-    <meta name="telegram" content="app">
-    <title>Telegram Clicker Game</title>
+    <title>Игра Кликер</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🔥 Кликер Гейм 🔥</h1>
-        </header>
-        <main>
-            <p class="coins-display">💰 Монеты: <span id="coins">0</span></p>
-            <div id="click-area" class="click-area">
-                <img src="your-image.png" alt="Click me!" id="click-image">
-            </div>
-        </main>
-        <footer>
-            <button id="referral-button" class="button">Реферальная ссылка</button>
-            <p id="referral-link"></p>
-        </footer>
+    <div id="game">
+        <h1>Игра Кликер</h1>
+        <div id="coins">0</div>
+        <img id="click-image" src="image.png" alt="Click me" />
+        <div>
+            <button id="referral-button">Получить реферальную ссылку</button>
+            <a id="referral-link" href="#" target="_blank"></a>
+        </div>
+        <div id="leaderboard"></div>
     </div>
     <script src="script.js"></script>
 </body>
