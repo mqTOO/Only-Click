@@ -1,110 +1,51 @@
-/* Общие стили */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #141e30, #243b55);
-    color: #fff;
+    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    overflow: hidden;
-}
-
-/* Контейнер */
-.container {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    padding: 20px;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-/* Заголовок */
-header h1 {
-    font-size: 24px;
     margin: 0;
-    padding: 10px;
-    background: linear-gradient(90deg, #ff8c00, #ff4500);
-    color: #fff;
-    border-radius: 10px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    background-color: #f0f0f0;
 }
 
-/* Монеты */
-.coins-display {
-    font-size: 20px;
-    margin: 20px 0;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.2);
+#game {
+    text-align: center;
+    background-color: white;
+    padding: 20px;
     border-radius: 10px;
-    display: inline-block;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Картинка для кликов */
-.click-area {
-    position: relative;
-    margin: 20px auto;
-    width: 200px;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: radial-gradient(circle, #ff8c00, #ff4500);
-    border-radius: 50%;
-    box-shadow: 0 4px 15px rgba(255, 69, 0, 0.6);
-    animation: pulse 1.5s infinite;
-    cursor: pointer;
+#coins {
+    font-size: 2em;
+    margin-bottom: 20px;
 }
 
 #click-image {
-    width: 100px;
-    height: 100px;
-    user-select: none;
-    touch-action: manipulation;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: transform 0.2s ease;
 }
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
+#click-image:hover {
+    transform: scale(1.1);
 }
 
-/* Кнопка */
-.button {
-    background: linear-gradient(90deg, #1e90ff, #007bff);
-    color: #fff;
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
     border: none;
-    padding: 12px 20px;
-    font-size: 16px;
     border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0, 123, 255, 0.4);
-    transition: all 0.2s ease-in-out;
 }
 
-.button:hover {
-    background: linear-gradient(90deg, #007bff, #1e90ff);
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.6);
-    transform: scale(1.05);
-}
-
-/* Реферальная ссылка */
-#referral-link {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #1e90ff;
-    word-wrap: break-word;
-    text-shadow: 0 1px 3px rgba(30, 144, 255, 0.8);
-    cursor: pointer;
+a {
+    display: block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
 }
