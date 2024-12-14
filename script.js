@@ -3,42 +3,63 @@ document.addEventListener("DOMContentLoaded", () => {
     const clickImage = document.getElementById("click-image");
     const referralButton = document.getElementById("referral-button");
     const referralLink = document.getElementById("referral-link");
-    const leaderboardElement = document.createElement("div");
-    leaderboardElement.id = "leaderboard";
-    document.body.appendChild(leaderboardElement);
+    const leaderboardList = document.getElementById("leaderboard-list");
 
-    const tg = window.Telegram.WebApp;
-
+    // Получаем данные из localStorage, если они есть
     let coins = parseInt(localStorage.getItem("coins")) || 0;
+    let userName = localStorage.getItem("userName") || "Игрок";
+
     coinsElement.textContent = coins;
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const referralId = urlParams.get("start");
-    if (referralId) {
-        const refBonus = 10;
-        coins += refBonus;
-        localStorage.setItem("coins", coins);
-        coinsElement.textContent = coins;
-        alert(`Вы получили ${refBonus} монет по реферальной ссылке!`);
-    }
+    // API endpoint для обновления кликов
+    const updateLeaderboardOnServer = async () => {
+        const response = await fetch("https://only-click.onrender.com/update", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: userName,
+                coins: coins
+            })
+        });
 
+        if (response.ok) {
+            console.log("Данные обновлены на сервере");
+        }
+    };
+
+    // API endpoint для получения таблицы лидеров
+    const getLeaderboardFromServer = async () => {
+        const response = await fetch("https://only-click.onrender.com/leaderboard");
+        if (response.ok) {
+            const leaderboard = await response.json();
+            leaderboardList.innerHTML = leaderboard
+                .map(player => `<li>${player.username}: ${player.coins} кликов</li>`)
+                .join("");
+        }
+    };
+
+    // Обработчик клика по изображению
     const handleClick = () => {
         coins++;
         coinsElement.textContent = coins;
         localStorage.setItem("coins", coins);
+        updateLeaderboardOnServer(); // Отправляем обновленные данные на сервер
     };
 
-    // Обработчики событий для мобильных устройств и ПК
-    clickImage.addEventListener("touchstart", handleClick);
+    // Обработчики событий для кликов по изображению
     clickImage.addEventListener("click", handleClick);
+    clickImage.addEventListener("touchstart", handleClick); // для мобильных устройств
 
+    // Обработчик для получения реферальной ссылки
     referralButton.addEventListener("click", () => {
-        const botUsername = "YourBotUsername"; // Замените на имя вашего бота
-        const userId = tg.initDataUnsafe.user?.id || "default";
-        const refLink = `https://t.me/${botUsername}?start=${userId}`;
+        const botUsername = "only_click_bot"; // Замените на имя вашего бота
+        const refLink = `https://t.me/${botUsername}?start=${userName}`;
         referralLink.textContent = refLink;
         referralLink.style.cursor = "pointer";
 
+        // Копирование ссылки в буфер обмена
         referralLink.addEventListener("click", () => {
             navigator.clipboard.writeText(refLink).then(() => {
                 alert("Ссылка скопирована!");
@@ -46,41 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Отправка результата на сервер
-    const updateLeaderboard = () => {
-        const userId = tg.initDataUnsafe.user?.id || "anonymous";
-        const userName = tg.initDataUnsafe.user?.username || "Player";
-
-        fetch("https://your-render-app-url.com/update", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userId, userName, clicks: coins }),
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    console.log("Leaderboard updated!");
-                }
-            })
-            .catch(err => console.error("Error updating leaderboard:", err));
-    };
-
-    // Получение топа лидеров
-    const fetchLeaderboard = () => {
-        fetch("https://your-render-app-url.com/leaderboard")
-            .then(res => res.json())
-            .then(data => {
-                leaderboardElement.innerHTML = "<h2>🏆 Топ кликеров 🏆</h2>";
-                data.forEach((user, index) => {
-                    leaderboardElement.innerHTML += `<p>${index + 1}. ${user.userName} — ${user.clicks} кликов</p>`;
-                });
-            })
-            .catch(err => console.error("Error fetching leaderboard:", err));
-    };
-
-    // Обновляем таблицу лидеров каждые 10 секунд
-    setInterval(fetchLeaderboard, 10000);
-
-    // Обновляем сервер после каждого клика
-    clickImage.addEventListener("click", updateLeaderboard);
+    // Загружаем таблицу лидеров при первом запуске
+    getLeaderboardFromServer();
 });

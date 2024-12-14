@@ -1,46 +1,35 @@
-const express = require("express");
+const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Для обработки JSON запросов
+app.use(cors());
 app.use(express.json());
 
-// Временное хранилище данных (можно заменить на базу данных)
-let leaderboard = [];
+let leaderboard = []; // Массив для хранения лидеров (пока в памяти)
 
-// Эндпоинт для получения таблицы лидеров
-app.get("/leaderboard", (req, res) => {
-    leaderboard.sort((a, b) => b.clicks - a.clicks); // Сортировка по кликам
-    res.json(leaderboard.slice(0, 10)); // Отправляем топ-10
+// API для получения таблицы лидеров
+app.get('/leaderboard', (req, res) => {
+    leaderboard.sort((a, b) => b.coins - a.coins); // Сортировка по количеству монет
+    res.json(leaderboard.slice(0, 5)); // Возвращаем только топ-5
 });
 
-// Эндпоинт для обновления результата пользователя
-app.post("/update", (req, res) => {
-    const { userId, userName, clicks } = req.body;
+// API для обновления данных о пользователе
+app.post('/update', (req, res) => {
+    const { username, coins } = req.body;
 
-    if (!userId || !userName || !clicks) {
-        return res.status(400).json({ error: "Invalid data" });
-    }
-
-    // Проверяем, есть ли пользователь в таблице лидеров
-    const userIndex = leaderboard.findIndex(user => user.userId === userId);
-
-    if (userIndex > -1) {
-        leaderboard[userIndex].clicks = Math.max(leaderboard[userIndex].clicks, clicks);
+    // Проверяем, есть ли уже пользователь в таблице лидеров
+    const userIndex = leaderboard.findIndex(user => user.username === username);
+    if (userIndex !== -1) {
+        leaderboard[userIndex].coins = coins; // Обновляем количество монет
     } else {
-        leaderboard.push({ userId, userName, clicks });
+        leaderboard.push({ username, coins }); // Добавляем нового пользователя
     }
 
-    // Сортируем таблицу лидеров
-    leaderboard.sort((a, b) => b.clicks - a.clicks);
-
-    // Ограничиваем список топ-10
-    leaderboard = leaderboard.slice(0, 10);
-
-    res.json({ success: true });
+    res.status(200).send('Data updated');
 });
 
-// Запуск сервера
+// Запускаем сервер
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on http://localhost:${port}`);
 });
