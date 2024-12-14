@@ -5,13 +5,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const referralLink = document.getElementById("referral-link");
     const leaderboardList = document.getElementById("leaderboard-list");
 
-    // Получаем данные из localStorage, если они есть
-    let coins = parseInt(localStorage.getItem("coins")) || 0;
-    let userName = localStorage.getItem("userName") || "Игрок";
+    // Инициализация Telegram Web App API
+    const tg = window.Telegram.WebApp;
 
+    // Получаем имя пользователя из Telegram Web App
+    const userName = tg.initDataUnsafe?.user?.username || 'Игрок';
+
+    // Получаем данные о кликах из localStorage или устанавливаем 0 по умолчанию
+    let coins = parseInt(localStorage.getItem("coins")) || 0;
     coinsElement.textContent = coins;
 
-    // API endpoint для обновления кликов
+    // API для обновления данных о пользователе
     const updateLeaderboardOnServer = async () => {
         const response = await fetch("https://only-click.onrender.com/update", {
             method: "POST",
@@ -29,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // API endpoint для получения таблицы лидеров
+    // API для получения таблицы лидеров
     const getLeaderboardFromServer = async () => {
         const response = await fetch("https://only-click.onrender.com/leaderboard");
         if (response.ok) {
