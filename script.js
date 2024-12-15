@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const tg = window.Telegram.WebApp;
-    const tg = requestFullscreen;
+    const tg = requestFullscreen();
     
     // Проверка наличия WebApp API
     if (!tg) {
