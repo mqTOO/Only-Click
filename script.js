@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Функция для обновления данных на сервере
     const updateLeaderboardOnServer = async () => {
-        const response = await fetch("https://your-render-app-url.com/update", {
+        const response = await fetch("https://only-click.onrender.com/update", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Функция для получения таблицы лидеров
     const getLeaderboardFromServer = async () => {
-        const response = await fetch("https://your-render-app-url.com/leaderboard");
+        const response = await fetch("https://only-click.onrender.com/leaderboard");
         if (response.ok) {
             const leaderboard = await response.json();
             const leaderboardList = document.getElementById("leaderboard-list");
