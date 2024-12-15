@@ -1,16 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
     const tg = window.Telegram.WebApp;
-    
+
     // Проверка наличия WebApp API
     if (!tg) {
         console.error("Ошибка: приложение не запущено внутри Telegram.");
         return;
     }
+
     // Разворачиваем приложение на весь экран
     tg.expand();
-    
+    tg.requestFullscreen();
+
     // Получаем имя пользователя из Telegram WebApp API
-    const userName = tg.initDataUnsafe?.user?.username || 'Игрок';
+    const userName = tg.initDataUnsafe?.user?.username || "Игрок";
 
     // Инициализация монет
     let coins = parseInt(localStorage.getItem("coins")) || 0;
@@ -63,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Функция для создания реферальной ссылки
     const referralButton = document.getElementById("referral-button");
     referralButton.addEventListener("click", () => {
-        const botUsername = "only_click_bot"; // Замените на имя вашего бота
+        const botUsername = "only_click_bot"; // Имя вашего бота
         const refLink = `https://t.me/${botUsername}?start=${userName}`;
         const referralLink = document.getElementById("referral-link");
         referralLink.textContent = refLink;
