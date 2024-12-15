@@ -6,7 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Ошибка: приложение не запущено внутри Telegram.");
         return;
     }
-
+    // Разворачиваем приложение на весь экран
+    tg.expand();
+    
     // Получаем имя пользователя из Telegram WebApp API
     const userName = tg.initDataUnsafe?.user?.username || 'Игрок';
 
