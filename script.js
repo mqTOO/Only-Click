@@ -1,21 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const coinsElement = document.getElementById("coins");
-    const clickImage = document.getElementById("click-image");
-    const referralButton = document.getElementById("referral-button");
-    const referralLink = document.getElementById("referral-link");
-    const leaderboardList = document.getElementById("leaderboard-list");
-
-    // Инициализация Telegram Web App API
     const tg = window.Telegram.WebApp;
 
-    // Получаем имя пользователя из Telegram Web App
+    // Проверка наличия WebApp API
+    if (!tg) {
+        console.error("Ошибка: приложение не запущено внутри Telegram.");
+        return;
+    }
+
+    // Получаем имя пользователя из Telegram WebApp API
     const userName = tg.initDataUnsafe?.user?.username || 'Игрок';
 
-    // Получаем данные о кликах из localStorage или устанавливаем 0 по умолчанию
+    // Инициализация монет
     let coins = parseInt(localStorage.getItem("coins")) || 0;
+    const coinsElement = document.getElementById("coins");
     coinsElement.textContent = coins;
 
-    // API для обновления данных о пользователе
+    // Функция для обновления таблицы лидеров на сервере
     const updateLeaderboardOnServer = async () => {
         const response = await fetch("https://only-click.onrender.com/update", {
             method: "POST",
@@ -33,37 +33,41 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // API для получения таблицы лидеров
+    // Функция для получения таблицы лидеров
     const getLeaderboardFromServer = async () => {
         const response = await fetch("https://only-click.onrender.com/leaderboard");
         if (response.ok) {
             const leaderboard = await response.json();
+            const leaderboardList = document.getElementById("leaderboard-list");
             leaderboardList.innerHTML = leaderboard
                 .map(player => `<li>${player.username}: ${player.coins} кликов</li>`)
                 .join("");
         }
     };
 
-    // Обработчик клика по изображению
+    // Функция обработки клика
     const handleClick = () => {
         coins++;
         coinsElement.textContent = coins;
         localStorage.setItem("coins", coins);
-        updateLeaderboardOnServer(); // Отправляем обновленные данные на сервер
+        updateLeaderboardOnServer();
     };
 
-    // Обработчики событий для кликов по изображению
+    // Добавляем обработчики кликов по изображению
+    const clickImage = document.getElementById("click-image");
     clickImage.addEventListener("click", handleClick);
-    clickImage.addEventListener("touchstart", handleClick); // для мобильных устройств
+    clickImage.addEventListener("touchstart", handleClick); // Для мобильных устройств
 
-    // Обработчик для получения реферальной ссылки
+    // Функция для создания реферальной ссылки
+    const referralButton = document.getElementById("referral-button");
     referralButton.addEventListener("click", () => {
         const botUsername = "only_click_bot"; // Замените на имя вашего бота
         const refLink = `https://t.me/${botUsername}?start=${userName}`;
+        const referralLink = document.getElementById("referral-link");
         referralLink.textContent = refLink;
         referralLink.style.cursor = "pointer";
 
-        // Копирование ссылки в буфер обмена
+        // Копирование реферальной ссылки в буфер обмена
         referralLink.addEventListener("click", () => {
             navigator.clipboard.writeText(refLink).then(() => {
                 alert("Ссылка скопирована!");
@@ -71,6 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Загружаем таблицу лидеров при первом запуске
+    // Загружаем таблицу лидеров
     getLeaderboardFromServer();
 });

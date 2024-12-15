@@ -3,20 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Игра Кликер</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Кликер в Telegram</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        #coins {
+            font-size: 2em;
+            margin-top: 20px;
+        }
+
+        #click-image {
+            width: 200px;
+            height: 200px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #referral-link {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #007bff;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        #leaderboard-list {
+            margin-top: 30px;
+            padding: 0;
+            list-style: none;
+        }
+
+        #leaderboard-list li {
+            margin: 10px 0;
+        }
+    </style>
+    <!-- Подключаем Telegram Web App API -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <div id="game">
-        <h1>Игра Кликер</h1>
-        <div id="coins">0</div>
-        <img id="click-image" src="image.png" alt="Click me" />
-        <div>
-            <button id="referral-button">Получить реферальную ссылку</button>
-            <a id="referral-link" href="#" target="_blank"></a>
-        </div>
-        <div id="leaderboard"></div>
-    </div>
+    <h1>Кликер в Telegram</h1>
+    <div id="coins">0</div>
+    <img id="click-image" src="image.png" alt="Click me">
+    <div id="referral-button">Получить реферальную ссылку</div>
+    <div id="referral-link"></div>
+    <ul id="leaderboard-list"></ul>
+
     <script src="script.js"></script>
 </body>
 </html>
