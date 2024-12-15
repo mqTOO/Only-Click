@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const tg = window.Telegram.WebApp;
-
+    const tg = requestFullscreen;
+    
     // Проверка наличия WebApp API
     if (!tg) {
         console.error("Ошибка: приложение не запущено внутри Telegram.");
