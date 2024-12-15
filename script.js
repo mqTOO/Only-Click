@@ -6,6 +6,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const leaderboardList = document.getElementById("leaderboard-list");
 
     // Инициализация Telegram Web App API
+    const tg = window.Telegram.WebApp;
+
+    // Получаем имя пользователя из Telegram Web App
+    const userName = tg.initDataUnsafe?.user?.username || 'Игрок';
 
 
     // Получаем данные о кликах из localStorage или устанавливаем 0 по умолчанию
