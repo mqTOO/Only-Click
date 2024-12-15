@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // API для обновления данных о пользователе
     const updateLeaderboardOnServer = async () => {
-        const response = await fetch("https://your-render-app-url.com/update", {
+        const response = await fetch("https://only-click.onrender.com/update", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // API для получения таблицы лидеров
     const getLeaderboardFromServer = async () => {
-        const response = await fetch("https://your-render-app-url.com/leaderboard");
+        const response = await fetch("https://only-click.onrender.com/leaderboard");
         if (response.ok) {
             const leaderboard = await response.json();
             leaderboardList.innerHTML = leaderboard
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Обработчик для получения реферальной ссылки
     referralButton.addEventListener("click", () => {
-        const botUsername = "YourBotUsername"; // Замените на имя вашего бота
+        const botUsername = "only_click_bot"; // Замените на имя вашего бота
         const refLink = `https://t.me/${botUsername}?start=${userName}`;
         referralLink.textContent = refLink;
         referralLink.style.cursor = "pointer";
