@@ -2,18 +2,37 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, initial-scale=1.0">
     <title>Кликер в Telegram</title>
     <link rel="stylesheet" href="style.css"> <!-- Подключение внешнего CSS -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <h1>Кликер в Telegram</h1>
-    <div id="coins">0</div>
-    <img id="click-image" src="image.png" alt="Click me">
-    <div id="referral-button">Получить реферальную ссылку</div>
-    <div id="referral-link"></div>
-    <ul id="leaderboard-list"></ul>
+    <div id="game-container">
+        <!-- Картинка сверху -->
+        <img id="top-image" src="top-image.png" alt="Top Image">
+
+        <!-- Счетчик кликов -->
+        <div id="coins">0</div>
+
+        <!-- Монетка, по которой кликают -->
+        <img id="click-image" src="coin-image.png" alt="Click me">
+
+        <!-- Картинка для открытия меню -->
+        <img id="referral-button" src="friends-icon.png" alt="Friends">
+
+        <!-- Меню для реферальной ссылки -->
+        <div id="referral-menu">
+            <div id="referral-copy" class="referral-option">Копировать ссылку</div>
+            <div id="referral-share" class="referral-option">Отправить друзьям</div>
+        </div>
+
+        <!-- Реферальная ссылка -->
+        <div id="referral-link"></div>
+
+        <!-- Таблица лидеров -->
+        <ul id="leaderboard-list"></ul>
+    </div>
 
     <script src="script.js"></script>
 </body>
