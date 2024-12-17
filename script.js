@@ -57,10 +57,9 @@ document.addEventListener("DOMContentLoaded", () => {
         updateLeaderboardOnServer();
     };
 
-    // Добавляем обработчики кликов по изображению
+    // Добавляем обработчик кликов по изображению (срабатывает только один раз при клике)
     const clickImage = document.getElementById("click-image");
-    clickImage.addEventListener("click", handleClick);
-    clickImage.addEventListener("touchstart", handleClick); // Для мобильных устройств
+    clickImage.addEventListener("click", handleClick);  // Убираем touchstart
 
     // Функция для создания реферальной ссылки
     const referralButton = document.getElementById("referral-button");
