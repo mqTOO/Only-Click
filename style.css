@@ -20,27 +20,39 @@ body {
     color: #fff;
 }
 
-h1 {
-    font-size: 2.5rem;
+/* Контейнер игры */
+#game-container {
+    text-align: center;
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Картинка сверху */
+#top-image {
+    width: 100%;
+    max-width: 300px;
     margin-bottom: 20px;
-    font-weight: bold;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
 }
 
+/* Счетчик кликов */
 #coins {
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: 700;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
+/* Монетка, по которой кликают */
 #click-image {
-    width: 180px;
-    height: 180px;
+    width: 250px;  /* Размер монеты */
+    height: 250px;  /* Размер монеты */
     cursor: pointer;
     border-radius: 50%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 30px 0;  /* Отступы сверху и снизу */
 }
 
 #click-image:hover {
@@ -48,73 +60,76 @@ h1 {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
+/* Картинка для открытия меню */
 #referral-button {
-    margin-top: 20px;
-    font-size: 1.2rem;
-    color: #007bff;
-    text-decoration: underline;
+    width: 50px;
+    height: 50px;
     cursor: pointer;
-    transition: color 0.3s ease;
+    margin-top: 30px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
 }
 
 #referral-button:hover {
-    color: #0056b3;
+    transform: scale(1.1);
 }
 
-#referral-link {
-    margin-top: 10px;
+/* Меню для реферальной ссылки */
+#referral-menu {
+    display: none;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    animation: slideIn 0.3s ease;
+}
+
+.referral-option {
     font-size: 1.2rem;
-    color: #28a745;
-    text-decoration: underline;
+    color: #fff;
+    margin: 10px 0;
     cursor: pointer;
     transition: color 0.3s ease;
 }
 
-#referral-link:hover {
-    color: #218838;
+.referral-option:hover {
+    color: #28a745;
 }
 
-#leaderboard-list {
-    margin-top: 30px;
-    padding: 0;
-    list-style: none;
-    text-align: left;
-    font-size: 1.1rem;
+/* Анимация появления меню */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-#leaderboard-list li {
-    margin: 10px 0;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#leaderboard-list li span {
-    font-weight: bold;
-}
-
+/* Мобильная версия */
 @media (max-width: 600px) {
-    h1 {
-        font-size: 2rem;
+    #top-image {
+        width: 80%;
+        max-width: 250px;
     }
 
     #coins {
-        font-size: 1.5rem;
+        font-size: 2.5rem;
     }
 
     #click-image {
-        width: 160px;
-        height: 160px;
+        width: 200px;
+        height: 200px;
     }
 
     #referral-button {
-        font-size: 1rem;
+        width: 40px;
+        height: 40px;
     }
 
-    #referral-link {
+    #referral-menu {
         font-size: 1rem;
     }
 
