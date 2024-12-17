@@ -57,25 +57,36 @@ document.addEventListener("DOMContentLoaded", () => {
         updateLeaderboardOnServer();
     };
 
-    // Добавляем обработчик кликов по изображению (срабатывает только один раз при клике)
+    // Добавляем обработчики кликов по изображению
     const clickImage = document.getElementById("click-image");
-    clickImage.addEventListener("click", handleClick);  // Убираем touchstart
+    clickImage.addEventListener("click", handleClick);
+    clickImage.addEventListener("touchstart", handleClick); // Для мобильных устройств
 
     // Функция для создания реферальной ссылки
     const referralButton = document.getElementById("referral-button");
-    referralButton.addEventListener("click", () => {
-        const botUsername = "only_click_bot"; // Имя вашего бота
-        const refLink = `https://t.me/${botUsername}?start=${userName}`;
-        const referralLink = document.getElementById("referral-link");
-        referralLink.textContent = refLink;
-        referralLink.style.cursor = "pointer";
+    const referralMenu = document.getElementById("referral-menu");
 
-        // Копирование реферальной ссылки в буфер обмена
-        referralLink.addEventListener("click", () => {
-            navigator.clipboard.writeText(refLink).then(() => {
-                alert("Ссылка скопирована!");
-            });
-        });
+    referralButton.addEventListener("click", () => {
+        // Плавно открываем меню
+        referralMenu.style.display = referralMenu.style.display === "none" || !referralMenu.style.display ? "block" : "none";
+    });
+
+    // Копирование реферальной ссылки в буфер обмена
+    const referralCopy = document.getElementById("referral-copy");
+    referralCopy.addEventListener("click", () => {
+        const botUsername = "only_click_bot"; // Имя вашего бота
+        const link = `https://t.me/${botUsername}?start=${userName}`;
+        navigator.clipboard.writeText(link)
+            .then(() => alert("Ссылка скопирована!"))
+            .catch(err => console.error("Ошибка копирования:", err));
+    });
+
+    // Отправить ссылку друзьям
+    const referralShare = document.getElementById("referral-share");
+    referralShare.addEventListener("click", () => {
+        const botUsername = "only_click_bot"; // Имя вашего бота
+        const link = `https://t.me/${botUsername}?start=${userName}`;
+        window.open(`https://t.me/share/url?url=${encodeURIComponent(link)}`, "_blank");
     });
 
     // Загружаем таблицу лидеров
