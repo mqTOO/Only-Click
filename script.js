@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const tg = window.Telegram.WebApp;
+    const tg = window.Telegram.WebApp.disableVerticalSwipes();
 
     // Проверка наличия WebApp API
     if (!tg) {
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Разворачиваем приложение на весь экран
     tg.expand();
     tg.requestFullscreen();
-
+    
     // Получаем имя пользователя из Telegram WebApp API
     const userName = tg.initDataUnsafe?.user?.username || "Игрок";
 
