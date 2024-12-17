@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const tg = window.Telegram.WebApp.disableVerticalSwipes();
+    const tg = window.Telegram.WebApp;
 
     // Проверка наличия WebApp API
     if (!tg) {
