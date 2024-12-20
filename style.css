@@ -48,7 +48,7 @@ body {
 /* Счетчик кликов */
 #coins {
     font-family: 'DynaPuff', sans-serif;
-    font-size: 3rem;
+    font-size: 10rem;
     font-weight: 700;
     margin-bottom: 30px;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
@@ -74,8 +74,8 @@ body {
 /* Картинка для открытия меню */
 #referral-button,
 #profile-button {
-    width: 70px;
-    height: 70px;
+    width: 200px;
+    height: 100px;
     cursor: pointer;
     margin-top: 20px;
     border-radius: 50%;
@@ -88,7 +88,7 @@ body {
 }
 
 #profile-button {
-    left: 100px; /* Кнопка профиля будет справа от кнопки реферала */
+    left: 300px; /* Кнопка профиля будет справа от кнопки реферала */
 }
 
 #referral-button:hover,
