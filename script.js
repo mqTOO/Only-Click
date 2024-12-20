@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const tg = window.Telegram.WebApp;
-
+    window.Telegram.WebApp.ready()
+    window.Telegram.WebApp.disableVerticalSwipes()
     // Проверка наличия WebApp API
     if (!tg) {
         console.error("Ошибка: приложение не запущено внутри Telegram.");
@@ -14,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Разворачиваем приложение на весь экран
     tg.expand();
     tg.requestFullscreen();
-    tg.disableVerticalSwipes()
+    
     // Получаем имя пользователя из Telegram WebApp API
     const userName = tg.initDataUnsafe?.user?.username || "Игрок";
     const botUsername = "only_click_bot"; // Имя вашего бота
