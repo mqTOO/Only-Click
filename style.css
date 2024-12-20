@@ -1,0 +1,141 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f4f8;
+    background-image: url('background.jpg'); /* Путь к фоновому изображению */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    color: #fff;
+}
+
+/* Контейнер игры */
+#game-container {
+    text-align: center;
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Картинка сверху */
+#top-image {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+/* Счетчик кликов */
+#coins {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Монетка, по которой кликают */
+#click-image {
+	display: block;
+    width: 400px;  /* Размер монеты */
+    height: 400px;  /* Размер монеты */
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0 auto;  /* Отступы сверху и снизу */
+    
+}
+
+#click-image:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Картинка для открытия меню */
+#referral-button {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    margin-top: 30px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+#referral-button:hover {
+    transform: scale(1.1);
+}
+
+/* Меню для реферальной ссылки */
+#referral-menu {
+    display: none;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    animation: slideIn 0.3s ease;
+}
+
+.referral-option {
+    font-size: 1.2rem;
+    color: #fff;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.referral-option:hover {
+    color: #28a745;
+}
+
+/* Анимация появления меню */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Мобильная версия */
+@media (max-width: 600px) {
+    #top-image {
+        width: 80%;
+        max-width: 250px;
+    }
+
+    #coins {
+        font-size: 2.5rem;
+    }
+
+    #click-image {
+        width: 200px;
+        height: 200px;
+    }
+
+    #referral-button {
+        width: 40px;
+        height: 40px;
+    }
+
+    #referral-menu {
+        font-size: 1rem;
+    }
+
+    #leaderboard-list li {
+        font-size: 1rem;
+    }
+}
