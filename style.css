@@ -20,34 +20,35 @@ body {
     color: #fff;
     touch-action: manipulation;
     user-select: none;
+    flex-direction: column; /* Это нужно для того, чтобы все элементы шли сверху вниз */
 }
 
 /* Контейнер игры */
 #game-container {
     text-align: center;
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 90%;  /* Сделаем контейнер более гибким */
-    max-width: 800px; /* Ограничение максимальной ширины */
-    height: 90vh; /* Сделаем контейнер гибким по высоте */
-    padding: 20px;
-    overflow: hidden;
+    justify-content: flex-start; /* Чтобы элементы располагались сверху */
 }
 
 /* Картинка сверху */
 #top-image {
     width: 100%;
-    max-width: 600px;
-    margin-bottom: 20px;
+    max-width: 800px; /* Сделаем изображение больше */
+    margin-bottom: 40px;
     border-radius: 10px;
+    align-self: center; /* Центрируем изображение по горизонтали */
 }
 
 /* Счетчик кликов */
 #coins {
     font-family: 'DynaPuff', sans-serif;
-    font-size: 5vw;  /* Используем vw для адаптации */
+    font-size: 3rem;
     font-weight: 700;
     margin-bottom: 30px;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
@@ -55,16 +56,14 @@ body {
 
 /* Монетка, по которой кликают */
 #click-image {
-    width: 30vw;  /* Используем vw для адаптации */
-    height: 30vw;
-    max-width: 200px;  /* Ограничим максимальный размер */
-    max-height: 200px;
+    width: 600px;  /* Увеличиваем размер монетки */
+    height: 600px;
     cursor: pointer;
     border-radius: 50%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: block;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 #click-image:hover {
@@ -73,24 +72,53 @@ body {
 }
 
 /* Картинка для открытия меню */
-#referral-button, #profile-button {
-    width: 15vw;  /* Сделаем размер гибким */
-    height: 15vw;
-    min-width: 50px; /* Минимальный размер для маленьких экранов */
-    min-height: 50px;
+#referral-button,
+#profile-button {
+    width: 70px;
+    height: 70px;
     cursor: pointer;
-    margin-top: 30px;
+    margin-top: 20px;
     border-radius: 50%;
     transition: transform 0.3s ease;
     display: block;
-    margin: 20px auto;
+    position: absolute;
+    bottom: 20px;  /* Располагаем кнопки внизу */
+    left: 20px;    /* Кнопка реферала сдвигается влево */
+    z-index: 10;
 }
 
-#referral-button:hover, #profile-button:hover {
+#profile-button {
+    left: 100px; /* Кнопка профиля будет справа от кнопки реферала */
+}
+
+#referral-button:hover,
+#profile-button:hover {
     transform: scale(1.1);
 }
 
-/* Модальные окна */
+/* Меню для реферальной ссылки */
+#referral-menu {
+    display: none;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    animation: slideIn 0.3s ease;
+}
+
+.referral-option {
+    font-size: 1.2rem;
+    color: #fff;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.referral-option:hover {
+    color: #28a745;
+}
+
+/* Модальное окно с профилем */
 .modal {
     display: none;
     position: fixed;
@@ -99,7 +127,7 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8); /* Полупрозрачный фон */
 }
 
 .modal-content {
@@ -113,15 +141,12 @@ body {
 }
 
 #profile-avatar {
-    width: 15vw;
-    height: 15vw;
-    min-width: 80px;  /* Минимальная ширина */
-    min-height: 80px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     margin-bottom: 20px;
 }
 
-/* Кнопки реферальной ссылки */
 #referral-link-container {
     margin-bottom: 20px;
 }
@@ -163,66 +188,40 @@ body {
 }
 
 /* Мобильная версия */
-@media (max-width: 768px) {
-    #top-image {
-        width: 90%;
-        max-width: 500px;
-    }
-
-    #coins {
-        font-size: 6vw;
-    }
-
-    #click-image {
-        width: 50vw;
-        height: 50vw;
-    }
-
-    #referral-button, #profile-button {
-        width: 20vw;
-        height: 20vw;
-    }
-
-    .modal-content {
-        width: 90%;
-    }
-
-    #referral-link {
-        font-size: 0.9rem;
-    }
-}
-
-/* Очень маленькие экраны */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
     #top-image {
         width: 80%;
-        max-width: 300px;
+        max-width: 250px;
     }
 
     #coins {
-        font-size: 7vw;
+        font-size: 2.5rem;
     }
 
     #click-image {
-        width: 50vw;
-        height: 50vw;
+        width: 300px;  /* Увеличиваем монетку для мобильных */
+        height: 300px;
     }
 
-    #referral-button, #profile-button {
-        width: 30vw;
-        height: 30vw;
+    #referral-button,
+    #profile-button {
+        width: 60px;
+        height: 60px;
     }
 
-    #referral-copy-btn,
-    #referral-share-btn {
-        font-size: 0.9rem;
+    #referral-button {
+        left: 15px;
     }
 
-    .modal-content {
-        width: 85%;
+    #profile-button {
+        left: 85px;
     }
 
-    #referral-link {
-        font-size: 0.8rem;
+    #referral-menu {
+        font-size: 1rem;
+    }
+
+    #leaderboard-list li {
+        font-size: 1rem;
     }
 }
