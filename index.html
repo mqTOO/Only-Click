@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кликер в Telegram</title>
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div id="game-container">
+        <img id="top-image" src="top-image.png" alt="Top Image">
+        <div id="coins">0</div>
+        <img id="click-image" src="coin-image.png" alt="Click me">
+        <img id="referral-button" src="friends-icon.png" alt="Friends">
+        <div id="referral-menu">
+            <div id="referral-copy" class="referral-option">Копировать ссылку</div>
+            <div id="referral-share" class="referral-option">Отправить друзьям</div>
+        </div>
+        <div id="referral-link"></div>
+        <ul id="leaderboard-list"></ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
