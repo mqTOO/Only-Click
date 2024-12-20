@@ -18,6 +18,8 @@ body {
     height: 100vh;
     overflow: hidden;
     color: #fff;
+    touch-action: manipulation;  /* Отключаем масштабирование на мобильных устройствах */
+    user-select: none; /* Отключаем выделение текста */
 }
 
 /* Контейнер игры */
