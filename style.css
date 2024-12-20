@@ -27,7 +27,7 @@ body {
     text-align: center;
     position: relative;
     width: 100%;
-    max-width: auto; /* Ограничиваем максимальную ширину для крупных экранов */
+    max-width: 800px; /* Ограничиваем максимальную ширину для крупных экранов */
     height: auto;
     padding: 20px;
 }
@@ -68,14 +68,14 @@ body {
 
 /* Картинка для открытия меню */
 #referral-button, #profile-button {
-    width: 10;
-    height: auto;
+    width: 80px;
+    height: 80px;
     cursor: pointer;
-    margin-top: auto;
-    border-radius: 100%;
+    margin-top: 30px;
+    border-radius: 50%;
     transition: transform 0.3s ease;
     display: block;
-    margin: auto;
+    margin: 20px auto;
 }
 
 #referral-button:hover, #profile-button:hover {
@@ -155,7 +155,7 @@ body {
 /* Мобильная версия */
 @media (max-width: 600px) {
     #top-image {
-        width: 80%;
+        width: 100%;
         max-width: 250px;
     }
 
@@ -174,7 +174,7 @@ body {
     }
 
     .modal-content {
-        width: 90%;
+        width: 10%;
     }
 
     #referral-link {
