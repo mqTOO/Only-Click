@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-
+    tg.expand();
+    tg.requestFullscreen();
 
     const userName = tg.initDataUnsafe?.user?.username || "Игрок";
     const userAvatar = tg.initDataUnsafe?.user?.photo_url || "images/avatar.png";
