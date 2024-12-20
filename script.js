@@ -7,17 +7,29 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
+    // Запрещаем масштабирование
+    const viewportMeta = document.querySelector("meta[name=viewport]");
+    viewportMeta.setAttribute("content", "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no");
+
     // Разворачиваем приложение на весь экран
     tg.expand();
     tg.requestFullscreen();
-    tg.disableVerticalSwipes()
+
     // Получаем имя пользователя из Telegram WebApp API
     const userName = tg.initDataUnsafe?.user?.username || "Игрок";
     const botUsername = "only_click_bot"; // Имя вашего бота
     const referralLink = `https://t.me/${botUsername}?start=${userName}`;
 
-    // Инициализация монет
+    // Инициализация монет и даты начала
     let coins = parseInt(localStorage.getItem("coins")) || 0;
+    let startDate = localStorage.getItem("startDate");
+
+    if (!startDate) {
+        // Если дата начала еще не установлена, сохраняем текущую дату
+        startDate = new Date().toLocaleString();
+        localStorage.setItem("startDate", startDate);
+    }
+
     const coinsElement = document.getElementById("coins");
     coinsElement.textContent = coins;
 
@@ -73,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("profile-avatar").src = tg.initDataUnsafe?.user?.photo_url || '';  // Добавить аватар
         document.getElementById("profile-username").textContent = `Имя: ${userName}`;
         document.getElementById("profile-coins").textContent = `Клики: ${coins}`;
-        document.getElementById("profile-start-date").textContent = `Дата начала игры: ${new Date()}`;
+        document.getElementById("profile-start-date").textContent = `Дата начала игры: ${startDate}`;
         document.getElementById("profile-rank").textContent = `Ранг: TBD`; // Можно добавить логику для ранга
         profileModal.style.display = "block";
     });
