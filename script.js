@@ -12,9 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const viewportMeta = document.querySelector("meta[name=viewport]");
     viewportMeta.setAttribute("content", "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no");
 
-    // Разворачиваем приложение на весь экран
-    tg.expand();
-    tg.requestFullscreen();
+
     
     // Получаем имя пользователя из Telegram WebApp API
     const userName = tg.initDataUnsafe?.user?.username || "Игрок";
