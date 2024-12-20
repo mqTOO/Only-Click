@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Получаем имя пользователя из Telegram WebApp API
     const userName = tg.initDataUnsafe?.user?.username || "Игрок";
+    const botUsername = "only_click_bot"; // Имя вашего бота
+    const referralLink = `https://t.me/${botUsername}?start=${userName}`;
 
     // Инициализация монет
     let coins = parseInt(localStorage.getItem("coins")) || 0;
@@ -62,31 +64,51 @@ document.addEventListener("DOMContentLoaded", () => {
     clickImage.addEventListener("click", handleClick);
     clickImage.addEventListener("touchstart", handleClick); // Для мобильных устройств
 
-    // Функция для создания реферальной ссылки
+    // Модальное окно профиля
+    const profileButton = document.getElementById("profile-button");
+    const profileModal = document.getElementById("profile-modal");
+    const closeProfile = document.getElementById("close-profile");
+
+    profileButton.addEventListener("click", () => {
+        document.getElementById("profile-avatar").src = tg.initDataUnsafe?.user?.photo_url || '';  // Добавить аватар
+        document.getElementById("profile-username").textContent = `Имя: ${userName}`;
+        document.getElementById("profile-coins").textContent = `Клики: ${coins}`;
+        document.getElementById("profile-start-date").textContent = `Дата начала игры: ${new Date()}`;
+        document.getElementById("profile-rank").textContent = `Ранг: TBD`; // Можно добавить логику для ранга
+        profileModal.style.display = "block";
+    });
+
+    closeProfile.addEventListener("click", () => {
+        profileModal.style.display = "none";
+    });
+
+    // Модальное окно реферальной ссылки
     const referralButton = document.getElementById("referral-button");
-    const referralMenu = document.getElementById("referral-menu");
+    const referralModal = document.getElementById("referral-modal");
+    const closeReferral = document.getElementById("close-referral");
+    const referralLinkInput = document.getElementById("referral-link");
+    const referralCopyBtn = document.getElementById("referral-copy-btn");
+    const referralShareBtn = document.getElementById("referral-share-btn");
 
     referralButton.addEventListener("click", () => {
-        // Плавно открываем меню
-        referralMenu.style.display = referralMenu.style.display === "none" || !referralMenu.style.display ? "block" : "none";
+        referralLinkInput.value = referralLink; // Заполняем поле реферальной ссылкой
+        referralModal.style.display = "block";
+    });
+
+    closeReferral.addEventListener("click", () => {
+        referralModal.style.display = "none";
     });
 
     // Копирование реферальной ссылки в буфер обмена
-    const referralCopy = document.getElementById("referral-copy");
-    referralCopy.addEventListener("click", () => {
-        const botUsername = "only_click_bot"; // Имя вашего бота
-        const link = `https://t.me/${botUsername}?start=${userName}`;
-        navigator.clipboard.writeText(link)
-            .then(() => alert("Ссылка скопирована!"))
+    referralCopyBtn.addEventListener("click", () => {
+        navigator.clipboard.writeText(referralLink)
+            .then(() => alert("Реферальная ссылка скопирована!"))
             .catch(err => console.error("Ошибка копирования:", err));
     });
 
-    // Отправить ссылку друзьям
-    const referralShare = document.getElementById("referral-share");
-    referralShare.addEventListener("click", () => {
-        const botUsername = "only_click_bot"; // Имя вашего бота
-        const link = `https://t.me/${botUsername}?start=${userName}`;
-        window.open(`https://t.me/share/url?url=${encodeURIComponent(link)}`, "_blank");
+    // Отправка реферальной ссылки
+    referralShareBtn.addEventListener("click", () => {
+        window.open(`https://t.me/share/url?url=${encodeURIComponent(referralLink)}`, "_blank");
     });
 
     // Загружаем таблицу лидеров
