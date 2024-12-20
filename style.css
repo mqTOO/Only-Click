@@ -8,7 +8,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #f0f4f8;
-    background-image: url('background.jpg'); /* Путь к фоновому изображению */
+    background-image: url('background.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -18,16 +18,18 @@ body {
     height: 100vh;
     overflow: hidden;
     color: #fff;
-    touch-action: manipulation;  /* Отключаем масштабирование на мобильных устройствах */
-    user-select: none; /* Отключаем выделение текста */
+    touch-action: manipulation;
+    user-select: none;
 }
 
 /* Контейнер игры */
 #game-container {
     text-align: center;
     position: relative;
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    max-width: 800px; /* Ограничиваем максимальную ширину для крупных экранов */
+    height: auto;
+    padding: 20px;
 }
 
 /* Картинка сверху */
@@ -40,7 +42,7 @@ body {
 
 /* Счетчик кликов */
 #coins {
-    font-family: 'DynaPuff', sans-serif;  /* Применение шрифта */
+    font-family: 'DynaPuff', sans-serif;
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 30px;
@@ -49,8 +51,8 @@ body {
 
 /* Монетка, по которой кликают */
 #click-image {
-    width: 500px;  /* Размер монеты */
-    height: 500px;  /* Размер монеты */
+    width: 300px;
+    height: 300px;
     cursor: pointer;
     border-radius: 50%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -65,9 +67,9 @@ body {
 }
 
 /* Картинка для открытия меню */
-#referral-button {
-    width: 100px;
-    height: 100px;
+#referral-button, #profile-button {
+    width: 80px;
+    height: 80px;
     cursor: pointer;
     margin-top: 30px;
     border-radius: 50%;
@@ -76,49 +78,11 @@ body {
     margin: 20px auto;
 }
 
-#referral-button:hover {
+#referral-button:hover, #profile-button:hover {
     transform: scale(1.1);
 }
 
-/* Новая кнопка профиля */
-#profile-button {
-    width: 100px;
-    height: 100px;
-    cursor: pointer;
-    margin-top: 30px;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-    display: block;
-    margin: 20px auto;
-}
-
-#profile-button:hover {
-    transform: scale(1.1);
-}
-
-/* Меню для реферальной ссылки */
-#referral-menu {
-    display: none;
-    margin-top: 20px;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 8px;
-    animation: slideIn 0.3s ease;
-}
-
-.referral-option {
-    font-size: 1.2rem;
-    color: #fff;
-    margin: 10px 0;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.referral-option:hover {
-    color: #28a745;
-}
-
-/* Модальное окно с профилем */
+/* Модальные окна */
 .modal {
     display: none;
     position: fixed;
@@ -127,7 +91,7 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Полупрозрачный фон */
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .modal-content {
@@ -147,6 +111,7 @@ body {
     margin-bottom: 20px;
 }
 
+/* Кнопки реферальной ссылки */
 #referral-link-container {
     margin-bottom: 20px;
 }
@@ -203,16 +168,16 @@ body {
         height: 200px;
     }
 
-    #referral-button {
-        width: 40px;
-        height: 40px;
+    #referral-button, #profile-button {
+        width: 60px;
+        height: 60px;
     }
 
-    #referral-menu {
-        font-size: 1rem;
+    .modal-content {
+        width: 90%;
     }
 
-    #leaderboard-list li {
-        font-size: 1rem;
+    #referral-link {
+        font-size: 0.9rem;
     }
 }
