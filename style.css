@@ -27,7 +27,7 @@ body {
     text-align: center;
     position: relative;
     width: 100%;
-    max-width: 800px; /* Ограничиваем максимальную ширину для крупных экранов */
+    max-width: auto; /* Ограничиваем максимальную ширину для крупных экранов */
     height: auto;
     padding: 20px;
 }
@@ -68,14 +68,14 @@ body {
 
 /* Картинка для открытия меню */
 #referral-button, #profile-button {
-    width: 80px;
-    height: 80px;
+    width: 10;
+    height: auto;
     cursor: pointer;
-    margin-top: 30px;
-    border-radius: 50%;
+    margin-top: auto;
+    border-radius: 100%;
     transition: transform 0.3s ease;
     display: block;
-    margin: 20px auto;
+    margin: auto;
 }
 
 #referral-button:hover, #profile-button:hover {
