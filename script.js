@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Ошибка: приложение не запущено внутри Telegram.");
         return;
     }
-
+    tg.expand();
+    tg.requestFullscreen();
     // Запрещаем масштабирование
     const viewportMeta = document.querySelector("meta[name=viewport]");
     viewportMeta.setAttribute("content", "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no");
