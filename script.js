@@ -13,8 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const viewportMeta = document.querySelector("meta[name=viewport]");
     viewportMeta.setAttribute("content", "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no");
 
-    tg.expand();
-    tg.requestFullscreen();
 
     // Получаем имя пользователя из Telegram WebApp API
     const userName = tg.initDataUnsafe?.user?.username || "Игрок";
@@ -99,12 +97,34 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("profile-username").textContent = `Имя: ${userName}`;
         document.getElementById("profile-coins").textContent = `Клики: ${coins}`;
         document.getElementById("profile-start-date").textContent = `Дата начала игры: ${startDate}`;
-        document.getElementById("profile-rank").textContent = `Ранг: TBD`;
+        document.getElementById("profile-rank").textContent = `Ранг: TBD`; // Пример для ранга
     });
 
     // Реферальная ссылка
     const referralLinkInput = document.getElementById("referral-link");
     referralLinkInput.value = referralLink;
+
+    // Функция для копирования реферальной ссылки
+    const referralCopyButton = document.getElementById("referral-copy-btn");
+    referralCopyButton.addEventListener("click", () => {
+        referralLinkInput.select();
+        document.execCommand("copy");
+        alert("Реферальная ссылка скопирована!");
+    });
+
+    // Функция для делания реферальной ссылки доступной для обмена
+    const referralShareButton = document.getElementById("referral-share-btn");
+    referralShareButton.addEventListener("click", () => {
+        if (navigator.share) {
+            navigator.share({
+                title: "Присоединяйтесь к игре!",
+                text: "Используйте мою реферальную ссылку для присоединения к игре.",
+                url: referralLink
+            }).catch(err => console.error("Ошибка при делании репост: ", err));
+        } else {
+            alert("Ваш браузер не поддерживает функционал обмена.");
+        }
+    });
 
     // Загружаем таблицу лидеров
     getLeaderboardFromServer();
