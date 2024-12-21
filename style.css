@@ -20,7 +20,8 @@ body {
     color: #fff;
     touch-action: manipulation;
     user-select: none;
-    flex-direction: column; /* Это нужно для того, чтобы все элементы шли сверху вниз */
+    flex-direction: column;
+    position: relative; /* Добавим относительное позиционирование для body */
 }
 
 /* Контейнер игры */
@@ -28,21 +29,19 @@ body {
     text-align: center;
     position: relative;
     max-width: 100%;
-    max-height: 100%;
-    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Чтобы элементы располагались сверху */
+    justify-content: flex-start;
 }
 
 /* Картинка сверху */
 #top-image {
     width: 100%;
-    max-width: 800px; /* Сделаем изображение больше */
+    max-width: 800px;
     margin-bottom: 40px;
     border-radius: 10px;
-    align-self: center; /* Центрируем изображение по горизонтали */
+    align-self: center;
 }
 
 /* Счетчик кликов */
@@ -56,7 +55,7 @@ body {
 
 /* Монетка, по которой кликают */
 #click-image {
-    width: 600px;  /* Увеличиваем размер монетки */
+    width: 600px;
     height: 600px;
     cursor: pointer;
     border-radius: 50%;
@@ -71,75 +70,54 @@ body {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Картинка для открытия меню */
-#referral-button,
-#profile-button {
-    width: 200px;
-    height: 100px;
-    cursor: pointer;
+/* Вкладки */
+#tabs-container {
+    display: flex;
+    justify-content: space-around;
     margin-top: 20px;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-    display: block;
-    position: absolute;
-    bottom: 20px;  /* Располагаем кнопки внизу */
-    left: 20px;    /* Кнопка реферала сдвигается влево */
-    z-index: 10;
 }
 
-#profile-button {
-    left: 300px; /* Кнопка профиля будет справа от кнопки реферала */
-}
-
-#referral-button:hover,
-#profile-button:hover {
-    transform: scale(1.1);
-}
-
-/* Меню для реферальной ссылки */
-#referral-menu {
-    display: none;
-    margin-top: 20px;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 8px;
-    animation: slideIn 0.3s ease;
-}
-
-.referral-option {
+.tab-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 15px 25px;
     font-size: 1.2rem;
-    color: #fff;
-    margin: 10px 0;
     cursor: pointer;
-    transition: color 0.3s ease;
+    border-radius: 5px;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
 }
 
-.referral-option:hover {
-    color: #28a745;
+.tab-button i {
+    margin-right: 10px;
 }
 
-/* Модальное окно с профилем */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Полупрозрачный фон */
+.tab-button:hover {
+    background-color: #555;
 }
 
-.modal-content {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border-radius: 10px;
-    width: 80%;
+/* Контент вкладок */
+#tabs-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.tab-content {
+    display: none; /* Скрываем все вкладки по умолчанию */
     text-align: center;
-    color: #333;
 }
 
+#menu-content {
+    display: block; /* Показываем главное меню по умолчанию */
+}
+
+/* Модальные элементы */
 #profile-avatar {
     width: 100px;
     height: 100px;
@@ -175,16 +153,36 @@ body {
     background-color: #218838;
 }
 
-/* Анимация появления меню */
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Социальные сети */
+#social-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+#social-content ul li {
+    margin: 10px 0;
+}
+
+#social-content ul li a {
+    color: #28a745;
+    text-decoration: none;
+}
+
+#social-content ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Размещение кнопок снизу экрана */
+#tabs-container {
+    position: fixed;
+    bottom: 10px; /* Располагаем кнопки ближе к низу */
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.5); /* Транслюцентный фон для кнопок */
+    padding: 10px 0;
 }
 
 /* Мобильная версия */
@@ -203,25 +201,9 @@ body {
         height: 300px;
     }
 
-    #referral-button,
-    #profile-button {
-        width: 60px;
-        height: 60px;
-    }
-
-    #referral-button {
-        left: 15px;
-    }
-
-    #profile-button {
-        left: 85px;
-    }
-
-    #referral-menu {
-        font-size: 1rem;
-    }
-
-    #leaderboard-list li {
+    /* Размеры кнопок для мобильных */
+    .tab-button {
+        padding: 12px 18px;
         font-size: 1rem;
     }
 }
