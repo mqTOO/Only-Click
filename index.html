@@ -14,6 +14,7 @@
 	
         <!-- Контент вкладок -->
         <div id="tabs-content">
+            <!-- Вкладка Профиль -->
             <div class="tab-content" id="profile-content">
                 <h2>Профиль игрока</h2>
                 <div id="profile-info">
@@ -23,27 +24,9 @@
                     <p id="profile-start-date">Дата начала игры: </p>
                     <p id="profile-rank">Ранг: </p>
                 </div>
-				<div id="tabs-container">
-					<button class="tab-button" id="referral-tab">
-						<i class="fas fa-link"></i> Реферал
-					</button>
-					<button class="tab-button" id="profile-tab">
-						<i class="fas fa-user"></i> Профиль
-					</button>
-					<button class="tab-button" id="menu-tab">
-						<i class="fas fa-home"></i> Главное меню
-					</button>
-					<button class="tab-button" id="leaderboard-tab">
-						<i class="fas fa-trophy"></i> Топ игроков
-					</button>
-					<button class="tab-button" id="social-tab">
-						<i class="fas fa-share-alt"></i> Социальные сети
-					</button>
-				</div>
             </div>
-			
-			
-			
+            
+            <!-- Вкладка Реферал -->
             <div class="tab-content" id="referral-content">
                 <h2>Ваша реферальная ссылка</h2>
                 <div id="referral-link-container">
@@ -51,80 +34,25 @@
                     <button id="referral-copy-btn">Копировать</button>
                 </div>
                 <button id="referral-share-btn">Поделиться</button>
-				<div id="tabs-container">
-					<button class="tab-button" id="referral-tab">
-						<i class="fas fa-link"></i> Реферал
-					</button>
-					<button class="tab-button" id="profile-tab">
-						<i class="fas fa-user"></i> Профиль
-					</button>
-					<button class="tab-button" id="menu-tab">
-						<i class="fas fa-home"></i> Главное меню
-					</button>
-					<button class="tab-button" id="leaderboard-tab">
-						<i class="fas fa-trophy"></i> Топ игроков
-					</button>
-					<button class="tab-button" id="social-tab">
-						<i class="fas fa-share-alt"></i> Социальные сети
-					</button>
-				</div>
             </div>
-			
-			
-			
-			
+            
+            <!-- Вкладка Главное меню -->
             <div class="tab-content" id="menu-content">
                 <p>Добро пожаловать в главное меню! Здесь будут доступны различные опции и настройки.</p>
-				<img id="top-image" src="top-image.png" alt="Top Image">
-				<div id="coins">0</div>
-				<img id="click-image" src="coin-image.png" alt="Click me">
-				<div id="tabs-container">
-					<button class="tab-button" id="referral-tab">
-						<i class="fas fa-link"></i> Реферал
-					</button>
-					<button class="tab-button" id="profile-tab">
-						<i class="fas fa-user"></i> Профиль
-					</button>
-					<button class="tab-button" id="menu-tab">
-						<i class="fas fa-home"></i> Главное меню
-					</button>
-					<button class="tab-button" id="leaderboard-tab">
-						<i class="fas fa-trophy"></i> Топ игроков
-					</button>
-					<button class="tab-button" id="social-tab">
-						<i class="fas fa-share-alt"></i> Социальные сети
-					</button>
-				</div>
+                <img id="top-image" src="top-image.png" alt="Top Image">
+                <div id="coins">0</div>
+                <img id="click-image" src="coin-image.png" alt="Click me">
             </div>
-			
-			
-			
+            
+            <!-- Вкладка Топ игроков -->
             <div class="tab-content" id="leaderboard-content">
                 <h2>Топ игроков</h2>
                 <ul id="leaderboard-list">
                     <!-- Список лидеров будет загружаться с сервера -->
                 </ul>
-				<div id="tabs-container">
-					<button class="tab-button" id="referral-tab">
-						<i class="fas fa-link"></i> Реферал
-					</button>
-					<button class="tab-button" id="profile-tab">
-						<i class="fas fa-user"></i> Профиль
-					</button>
-					<button class="tab-button" id="menu-tab">
-						<i class="fas fa-home"></i> Главное меню
-					</button>
-					<button class="tab-button" id="leaderboard-tab">
-						<i class="fas fa-trophy"></i> Топ игроков
-					</button>
-					<button class="tab-button" id="social-tab">
-						<i class="fas fa-share-alt"></i> Социальные сети
-					</button>
-				</div>
             </div>
-			
-			
-			
+            
+            <!-- Вкладка Социальные сети -->
             <div class="tab-content" id="social-content">
                 <h2>Социальные сети</h2>
                 <p>Следите за нами в социальных сетях:</p>
@@ -134,26 +62,29 @@
                     <li><a href="https://www.facebook.com/your_game" target="_blank">Facebook</a></li>
                     <li><a href="https://www.youtube.com/your_game" target="_blank">YouTube</a></li>
                 </ul>
-				<div id="tabs-container">
-					<button class="tab-button" id="referral-tab">
-						<i class="fas fa-link"></i> Реферал
-					</button>
-					<button class="tab-button" id="profile-tab">
-						<i class="fas fa-user"></i> Профиль
-					</button>
-					<button class="tab-button" id="menu-tab">
-						<i class="fas fa-home"></i> Главное меню
-					</button>
-					<button class="tab-button" id="leaderboard-tab">
-						<i class="fas fa-trophy"></i> Топ игроков
-					</button>
-					<button class="tab-button" id="social-tab">
-						<i class="fas fa-share-alt"></i> Социальные сети
-					</button>
-				</div>
             </div>
         </div>
+
+        <!-- Кнопки навигации (вкладки) -->
+        <div id="tabs-container">
+            <button class="tab-button" id="referral-tab">
+                <i class="fas fa-link"></i> Реферал
+            </button>
+            <button class="tab-button" id="profile-tab">
+                <i class="fas fa-user"></i> Профиль
+            </button>
+            <button class="tab-button" id="menu-tab">
+                <i class="fas fa-home"></i> Главное меню
+            </button>
+            <button class="tab-button" id="leaderboard-tab">
+                <i class="fas fa-trophy"></i> Топ игроков
+            </button>
+            <button class="tab-button" id="social-tab">
+                <i class="fas fa-share-alt"></i> Социальные сети
+            </button>
+        </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
