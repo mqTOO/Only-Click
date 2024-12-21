@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.Telegram.WebApp.ready();
     window.Telegram.WebApp.disableVerticalSwipes();
-    
+    tg.expand();
+    tg.requestFullscreen();
 
     // Запрещаем масштабирование
     const viewportMeta = document.querySelector("meta[name=viewport]");
