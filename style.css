@@ -74,28 +74,30 @@ body {
 /* Вкладки */
 #tabs-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 20px;
     position: fixed;
-    bottom: 20px;
-    width: 100%;
+    bottom: 0;
     left: 0;
     right: 0;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
 }
 
 .tab-button {
     background-color: #333;
     color: white;
     border: none;
-    padding: 15px 25px;
-    font-size: 1.2rem;
+    padding: 10px 15px;
+    font-size: 1rem;
     cursor: pointer;
     border-radius: 5px;
-    margin: 0 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s ease, font-size 0.3s ease, padding 0.3s ease;
+    width: 30%; /* Устанавливаем ширину кнопок относительно экрана */
 }
 
 .tab-button i {
@@ -183,8 +185,9 @@ body {
 @media (max-width: 600px) {
     /* Вкладки */
     .tab-button {
-        font-size: 1rem; /* Уменьшаем шрифт на мобильных */
-        padding: 10px 15px; /* Уменьшаем отступы */
+        font-size: 0.9rem; /* Уменьшаем шрифт */
+        padding: 8px 10px; /* Уменьшаем отступы */
+        width: 30%; /* Кнопки занимают 30% ширины экрана */
     }
 
     /* Кнопки */
@@ -208,19 +211,33 @@ body {
         width: 80px; /* Уменьшаем аватарку */
         height: 80px;
     }
+
+    /* Оставляем кнопки внизу, фиксируем */
+    #tabs-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: space-between;
+        z-index: 100;
+    }
 }
 
 /* Стили для планшетов */
 @media (max-width: 1024px) and (min-width: 601px) {
     .tab-button {
-        font-size: 1.1rem; /* Увеличиваем шрифт для планшетов */
-        padding: 12px 20px; /* Немного увеличиваем отступы */
+        font-size: 1rem; /* Увеличиваем шрифт для планшетов */
+        padding: 12px 15px; /* Немного увеличиваем отступы */
+        width: 30%; /* Кнопки занимают 30% ширины экрана */
     }
 
     #referral-copy-btn,
     #referral-share-btn {
-        font-size: 1.1rem; /* Увеличиваем шрифт */
-        padding: 14px; /* Увеличиваем отступы */
+        font-size: 1rem; /* Увеличиваем шрифт */
+        padding: 12px; /* Увеличиваем отступы */
     }
 
     #coins {
@@ -242,13 +259,14 @@ body {
 @media (min-width: 1025px) {
     .tab-button {
         font-size: 1.3rem; /* Увеличиваем шрифт для десктопов */
-        padding: 15px 30px; /* Увеличиваем отступы */
+        padding: 15px 25px; /* Увеличиваем отступы */
+        width: 20%; /* Кнопки занимают 20% ширины экрана */
     }
 
     #referral-copy-btn,
     #referral-share-btn {
         font-size: 1.2rem; /* Увеличиваем шрифт */
-        padding: 16px; /* Увеличиваем отступы */
+        padding: 14px; /* Увеличиваем отступы */
     }
 
     #coins {
