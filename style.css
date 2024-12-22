@@ -21,7 +21,6 @@ body {
     touch-action: manipulation;
     user-select: none;
     flex-direction: column;
-    position: relative; /* Добавим относительное позиционирование для body */
 }
 
 /* Контейнер игры */
@@ -29,6 +28,8 @@ body {
     text-align: center;
     position: relative;
     max-width: 100%;
+    max-height: 100%;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -75,6 +76,11 @@ body {
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    left: 0;
+    right: 0;
 }
 
 .tab-button {
@@ -89,7 +95,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, font-size 0.3s ease, padding 0.3s ease;
 }
 
 .tab-button i {
@@ -138,7 +144,7 @@ body {
 
 #referral-copy-btn,
 #referral-share-btn {
-    padding: 10px;
+    padding: 12px;
     background-color: #28a745;
     color: white;
     border: none;
@@ -146,6 +152,7 @@ body {
     cursor: pointer;
     width: 100%;
     font-size: 1rem;
+    transition: padding 0.3s ease, font-size 0.3s ease;
 }
 
 #referral-copy-btn:hover,
@@ -172,38 +179,89 @@ body {
     text-decoration: underline;
 }
 
-/* Размещение кнопок снизу экрана */
-#tabs-container {
-    position: fixed;
-    bottom: 10px; /* Располагаем кнопки ближе к низу */
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    z-index: 10;
-    background-color: rgba(0, 0, 0, 0.5); /* Транслюцентный фон для кнопок */
-    padding: 10px 0;
-}
-
-/* Мобильная версия */
+/* Стили для мобильных устройств */
 @media (max-width: 600px) {
-    #top-image {
-        width: 80%;
-        max-width: 250px;
+    /* Вкладки */
+    .tab-button {
+        font-size: 1rem; /* Уменьшаем шрифт на мобильных */
+        padding: 10px 15px; /* Уменьшаем отступы */
+    }
+
+    /* Кнопки */
+    #referral-copy-btn,
+    #referral-share-btn {
+        font-size: 0.9rem; /* Уменьшаем шрифт */
+        padding: 10px; /* Уменьшаем отступы */
     }
 
     #coins {
-        font-size: 2.5rem;
+        font-size: 6rem; /* Уменьшаем шрифт для мобильных */
     }
 
     #click-image {
-        width: 300px;  /* Увеличиваем монетку для мобильных */
-        height: 300px;
+        width: 400px; /* Уменьшаем размер монеты */
+        height: 400px;
     }
 
-    /* Размеры кнопок для мобильных */
+    /* Профиль */
+    #profile-avatar {
+        width: 80px; /* Уменьшаем аватарку */
+        height: 80px;
+    }
+}
+
+/* Стили для планшетов */
+@media (max-width: 1024px) and (min-width: 601px) {
     .tab-button {
-        padding: 12px 18px;
-        font-size: 1rem;
+        font-size: 1.1rem; /* Увеличиваем шрифт для планшетов */
+        padding: 12px 20px; /* Немного увеличиваем отступы */
+    }
+
+    #referral-copy-btn,
+    #referral-share-btn {
+        font-size: 1.1rem; /* Увеличиваем шрифт */
+        padding: 14px; /* Увеличиваем отступы */
+    }
+
+    #coins {
+        font-size: 8rem; /* Немного увеличиваем шрифт для планшетов */
+    }
+
+    #click-image {
+        width: 500px; /* Увеличиваем размер монеты для планшетов */
+        height: 500px;
+    }
+
+    #profile-avatar {
+        width: 90px; /* Увеличиваем аватарку для планшетов */
+        height: 90px;
+    }
+}
+
+/* Стили для десктопов */
+@media (min-width: 1025px) {
+    .tab-button {
+        font-size: 1.3rem; /* Увеличиваем шрифт для десктопов */
+        padding: 15px 30px; /* Увеличиваем отступы */
+    }
+
+    #referral-copy-btn,
+    #referral-share-btn {
+        font-size: 1.2rem; /* Увеличиваем шрифт */
+        padding: 16px; /* Увеличиваем отступы */
+    }
+
+    #coins {
+        font-size: 10rem; /* Увеличиваем шрифт для десктопов */
+    }
+
+    #click-image {
+        width: 600px; /* Увеличиваем размер монеты */
+        height: 600px;
+    }
+
+    #profile-avatar {
+        width: 100px; /* Увеличиваем аватарку */
+        height: 100px;
     }
 }
