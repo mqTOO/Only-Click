@@ -74,7 +74,7 @@ body {
 /* Вкладки */
 #tabs-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 20px;
     position: fixed;
     bottom: 0;
@@ -96,8 +96,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s ease, font-size 0.3s ease, padding 0.3s ease;
-    width: 30%; /* Устанавливаем ширину кнопок относительно экрана */
+    transition: background-color 0.3s ease;
+    flex: 1; /* Растягиваем кнопки на всю доступную ширину */
+    margin: 0 5px; /* Отступы между кнопками */
 }
 
 .tab-button i {
@@ -186,8 +187,8 @@ body {
     /* Вкладки */
     .tab-button {
         font-size: 0.9rem; /* Уменьшаем шрифт */
-        padding: 8px 10px; /* Уменьшаем отступы */
-        width: 30%; /* Кнопки занимают 30% ширины экрана */
+        padding: 10px 12px; /* Уменьшаем отступы */
+        margin: 0 3px; /* Уменьшаем отступы между кнопками */
     }
 
     /* Кнопки */
@@ -224,6 +225,10 @@ body {
         justify-content: space-between;
         z-index: 100;
     }
+
+    .tab-button {
+        flex: 1; /* Растягиваем кнопки на всю ширину */
+    }
 }
 
 /* Стили для планшетов */
@@ -231,7 +236,7 @@ body {
     .tab-button {
         font-size: 1rem; /* Увеличиваем шрифт для планшетов */
         padding: 12px 15px; /* Немного увеличиваем отступы */
-        width: 10%; /* Кнопки занимают 30% ширины экрана */
+        margin: 0 5px; /* Отступы между кнопками */
     }
 
     #referral-copy-btn,
@@ -260,7 +265,7 @@ body {
     .tab-button {
         font-size: 1.3rem; /* Увеличиваем шрифт для десктопов */
         padding: 15px 25px; /* Увеличиваем отступы */
-        width: 20%; /* Кнопки занимают 20% ширины экрана */
+        margin: 0 10px; /* Отступы между кнопками */
     }
 
     #referral-copy-btn,
@@ -280,6 +285,4 @@ body {
 
     #profile-avatar {
         width: 100px; /* Увеличиваем аватарку */
-        height: 100px;
-    }
-}
+        height: 100
