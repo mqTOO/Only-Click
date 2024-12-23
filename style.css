@@ -130,7 +130,7 @@ body {
 #profile-avatar {
     width: 100px;
     height: 100px;
-    border-radius: 50%;
+    border-radius: 10%;
     margin-bottom: 20px;
 }
 
@@ -235,8 +235,8 @@ body {
 @media (max-width: 1024px) and (min-width: 601px) {
     .tab-button {
         font-size: 1rem; /* Увеличиваем шрифт для планшетов */
-        padding: 12px 15px; /* Немного увеличиваем отступы */
-        margin: 0 5px; /* Отступы между кнопками */
+        padding: 5px 5px; /* Немного увеличиваем отступы */
+        margin: 0; /* Отступы между кнопками */
     }
 
     #referral-copy-btn,
@@ -270,7 +270,7 @@ body {
 
     #referral-copy-btn,
     #referral-share-btn {
-        font-size: 1.2rem; /* Увеличиваем шрифт */
+        font-size: 8rem; /* Увеличиваем шрифт */
         padding: 14px; /* Увеличиваем отступы */
     }
 
