@@ -89,20 +89,20 @@ body {
     background-color: #333;
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 1px 1px;
     font-size: 1rem;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 1px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s ease;
     flex: auto; /* Растягиваем кнопки на всю доступную ширину */
-    margin: 0 5px; /* Отступы между кнопками */
+    margin: 0; /* Отступы между кнопками */
 }
 
 .tab-button i {
-    margin-right: 10px;
+    margin-right: 1px;
 }
 
 .tab-button:hover {
