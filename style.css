@@ -97,7 +97,7 @@ body {
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s ease;
-    flex: 1; /* Растягиваем кнопки на всю доступную ширину */
+    flex: auto; /* Растягиваем кнопки на всю доступную ширину */
     margin: 0 5px; /* Отступы между кнопками */
 }
 
