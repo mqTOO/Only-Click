@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clickSound.play();
 
         // Вибрация через Telegram API
-        web_app_trigger_haptic_feedback(); // Вибрация через Telegram WebApp API
+        impactOccurred(heavy); // Вибрация через Telegram WebApp API
     };
 
     // Функция для обновления таблицы лидеров на сервере
