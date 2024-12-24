@@ -9,9 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.Telegram.WebApp.ready();
     window.Telegram.WebApp.disableVerticalSwipes();
-    tg.expand();
+	tg.expand();
     tg.requestFullscreen();
-
     // Запрещаем масштабирование
     const viewportMeta = document.querySelector("meta[name=viewport]");
     if (viewportMeta) {
@@ -168,12 +167,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const referralShareButton = document.getElementById("referral-share-btn");
     if (referralShareButton) {
         referralShareButton.addEventListener("click", () => {
-            if (navigator.share) {
+            const message = `Привет! Попробуй эту игру: ${referralLink}`;
+
+            // Проверяем поддержку отправки через Telegram
+            if (tg.WebApp.sendData) {
+                tg.WebApp.sendData(message); // Отправляем текст в Telegram
+            } else if (navigator.share) {
+                // Если функционал share доступен
                 navigator.share({
                     title: "Присоединяйтесь к игре!",
-                    text: "Используйте мою реферальную ссылку для присоединения к игре.",
+                    text: message,
                     url: referralLink
-                }).catch(err => console.error("Ошибка при делании репост: ", err));
+                }).catch(err => console.error("Ошибка при делании репоста: ", err));
             } else {
                 alert("Ваш браузер не поддерживает функционал обмена.");
             }
