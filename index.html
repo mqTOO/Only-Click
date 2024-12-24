@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Кликер в Telegram</title>
     <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -38,7 +38,6 @@
             
             <!-- Вкладка Главное меню -->
             <div class="tab-content" id="menu-content">
-                <p>Добро пожаловать в главное меню! Здесь будут доступны различные опции и настройки.</p>
                 <img id="top-image" src="top-image.png" alt="Top Image">
                 <div id="coins">0</div>
                 <img id="click-image" src="coin-image.png" alt="Click me">
@@ -66,23 +65,25 @@
         </div>
 
         <!-- Кнопки навигации (вкладки) -->
-        <div id="tabs-container">
-            <button class="tab-button" id="referral-tab">
-                <i class="fas fa-link"></i> Реферал
-            </button>
-            <button class="tab-button" id="profile-tab">
-                <i class="fas fa-user"></i> Профиль
-            </button>
-            <button class="tab-button" id="menu-tab">
-                <i class="fas fa-home"></i> Главное меню
-            </button>
-            <button class="tab-button" id="leaderboard-tab">
-                <i class="fas fa-trophy"></i> Топ игроков
-            </button>
-            <button class="tab-button" id="social-tab">
-                <i class="fas fa-share-alt"></i> Социальные сети
-            </button>
-        </div>
+        <!-- Кнопки с изображениями -->
+		<div id="tabs-container">
+			<button class="tab-button" id="profile-tab">
+				<img src="profile-icon.png" alt="Profile" />
+			</button>
+			<button class="tab-button" id="menu-tab">
+				<img src="menu-icon.png" alt="Menu" />
+			</button>
+			<button class="tab-button" id="referral-tab">
+				<img src="referral-icon.png" alt="Referral" />
+			</button>
+			<button class="tab-button" id="leaderboard-tab">
+				<img src="leaderboard-icon.png" alt="Leaderboard" />
+			</button>
+			<button class="tab-button" id="social-tab">
+				<img src="referral-icon.png" alt="socials" />
+			</button>
+		</div>
+
     </div>
 
     <script src="script.js"></script>
