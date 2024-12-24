@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.Telegram.WebApp.ready();
     window.Telegram.WebApp.disableVerticalSwipes();
+    tg.expand();
+    tg.requestFullscreen();
 
     // Получаем имя пользователя из Telegram WebApp API
     const userName = tg.initDataUnsafe?.user?.username || "Игрок";
