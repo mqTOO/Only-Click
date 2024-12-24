@@ -98,7 +98,6 @@ body {
     flex: 1 1 10%;
     margin: 0 5px;
     position: relative;
-    overflow: hidden; /* Чтобы изображение не выходило за пределы кнопки */
 }
 
 .tab-button img {
