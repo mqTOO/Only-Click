@@ -7,6 +7,7 @@ app.use(cors());
 app.use(express.json());
 
 let leaderboard = []; // Массив для хранения лидеров (пока в памяти)
+let referrerData = {}; // Объект для хранения списка рефералов
 
 // API для получения таблицы лидеров
 app.get('/leaderboard', (req, res) => {
@@ -16,14 +17,22 @@ app.get('/leaderboard', (req, res) => {
 
 // API для обновления данных о пользователе
 app.post('/update', (req, res) => {
-    const { username, coins } = req.body;
+    const { username, coins, referrer } = req.body;
 
     // Проверяем, есть ли уже пользователь в таблице лидеров
     const userIndex = leaderboard.findIndex(user => user.username === username);
     if (userIndex !== -1) {
         leaderboard[userIndex].coins = coins; // Обновляем количество монет
     } else {
-        leaderboard.push({ username, coins }); // Добавляем нового пользователя
+        leaderboard.push({ username, coins, referrer });
+    }
+
+    // Добавляем рефералов
+    if (referrer) {
+        if (!referrerData[referrer]) {
+            referrerData[referrer] = [];
+        }
+        referrerData[referrer].push(username);
     }
 
     res.status(200).send('Data updated');
