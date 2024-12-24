@@ -210,6 +210,13 @@ body {
         width: 80px;
         height: 80px;
     }
+    
+    #profile-username,
+    #profile-coins,
+    #profile-start-date,
+    #profile-rank {
+        font-size: 0.8rem;
+    }
 
     #tabs-container {
         position: fixed;
