@@ -9,8 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.Telegram.WebApp.ready();
     window.Telegram.WebApp.disableVerticalSwipes();
-    tg.expand();
-    tg.requestFullscreen();
 
     // Получаем имя пользователя из Telegram WebApp API
     const userName = tg.initDataUnsafe?.user?.username || "Игрок";
@@ -35,15 +33,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // Звуковой эффект для клика
     const clickSound = new Audio('click-sound.mp3'); // Укажите путь к вашему звуковому файлу
 
-    // Функция для воспроизведения звука и вибрации
+    // Функция для воспроизведения звука и вибрации через Telegram API
     const playClickEffects = () => {
         // Воспроизводим звук
         clickSound.play();
 
-        // Вибрация (время в миллисекундах, если поддерживается)
-        if (navigator.vibrate) {
-            navigator.vibrate(100); // Вибрация на 100 миллисекунд
-        }
+        // Вибрация через Telegram API
+        tg.WebApp.vibrate(); // Вибрация через Telegram WebApp API
     };
 
     // Функция для обновления таблицы лидеров на сервере
@@ -175,25 +171,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Функция для делания реферальной ссылки доступной для обмена
+    // Функция для делания реферальной ссылки доступной для обмена через Telegram API
     const referralShareButton = document.getElementById("referral-share-btn");
     if (referralShareButton) {
         referralShareButton.addEventListener("click", () => {
             const message = `Привет! Попробуй эту игру: ${referralLink}`;
 
-            // Проверяем поддержку отправки через Telegram WebApp
-            if (tg.WebApp.sendData) {
-                tg.WebApp.sendData(message); // Отправляем текст в Telegram
-            } else if (navigator.share) {
-                // Если функционал share доступен
-                navigator.share({
-                    title: "Присоединяйтесь к игре!",
-                    text: message,
-                    url: referralLink
-                }).catch(err => console.error("Ошибка при делании репоста: ", err));
-            } else {
-                alert("Ваш браузер не поддерживает функционал обмена.");
-            }
+            // Отправляем сообщение через Telegram WebApp API
+            tg.WebApp.sendData(message); // Отправляем текст в Telegram
         });
     }
 
