@@ -30,6 +30,20 @@ document.addEventListener("DOMContentLoaded", () => {
         coinsElement.textContent = coins;
     }
 
+    // Звуковой эффект для клика
+    const clickSound = new Audio('click-sound.mp3'); // Укажите путь к вашему звуковому файлу
+
+    // Функция для воспроизведения звука и вибрации
+    const playClickEffects = () => {
+        // Воспроизводим звук
+        clickSound.play();
+
+        // Вибрация (время в миллисекундах, если поддерживается)
+        if (navigator.vibrate) {
+            navigator.vibrate(100); // Вибрация на 100 миллисекунд
+        }
+    };
+
     // Функция для обновления таблицы лидеров на сервере
     const updateLeaderboardOnServer = async () => {
         try {
@@ -82,6 +96,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         localStorage.setItem("coins", coins);
         updateLeaderboardOnServer();
+
+        // Воспроизведение звука и вибрации
+        playClickEffects();
     };
 
     // Добавляем обработчики кликов по изображению
