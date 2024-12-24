@@ -9,13 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.Telegram.WebApp.ready();
     window.Telegram.WebApp.disableVerticalSwipes();
-	tg.expand();
-    tg.requestFullscreen();
-    // Запрещаем масштабирование
-    const viewportMeta = document.querySelector("meta[name=viewport]");
-    if (viewportMeta) {
-        viewportMeta.setAttribute("content", "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no");
-    }
 
     // Получаем имя пользователя из Telegram WebApp API
     const userName = tg.initDataUnsafe?.user?.username || "Игрок";
@@ -169,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
         referralShareButton.addEventListener("click", () => {
             const message = `Привет! Попробуй эту игру: ${referralLink}`;
 
-            // Проверяем поддержку отправки через Telegram
+            // Проверяем поддержку отправки через Telegram WebApp
             if (tg.WebApp.sendData) {
                 tg.WebApp.sendData(message); // Отправляем текст в Telegram
             } else if (navigator.share) {
