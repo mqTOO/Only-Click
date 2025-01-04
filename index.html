@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кликер в Telegram</title>
+  <script src="https://unpkg.com/@telegram/web-app"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .stats {
+      margin: 20px 0;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 20px;
+      }
+
+      button {
+        width: 100%;
+        font-size: 16px;
+      }
+
+      .container {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Кликер Telegram</h1>
+    <div class="score-container">
+      <p>Очки: <span id="score">0</span></p>
+    </div>
+    <div class="stats">
+      <p>Уровень: <span id="level">1</span></p>
+      <p>Очки до следующего уровня: <span id="nextLevelPoints">10</span></p>
+      <p>Общая сумма очков: <span id="totalScore">0</span></p>
+    </div>
+    <button id="clickButton">Кликни меня!</button>
+    <p>Нажимайте на кнопку, чтобы заработать очки и повышать уровень!</p>
+  </div>
+
+  <script>
+    Telegram.WebApp.init(); // Инициализация Telegram WebApp
+
+    let score = 0;
+    let totalScore = 0;
+    let level = 1;
+    let pointsToNextLevel = 10;
+
+    const scoreElement = document.getElementById('score');
+    const totalScoreElement = document.getElementById('totalScore');
+    const levelElement = document.getElementById('level');
+    const nextLevelPointsElement = document.getElementById('nextLevelPoints');
+    const clickButton = document.getElementById('clickButton');
+
+    // URL сервера для сохранения данных в Excel
+    const serverUrl = 'https://example.com/save-to-excel'; // Замените на свой URL
+
+    // Функция для сохранения данных в Excel
+    async function saveDataToExcel() {
+      const data = {
+        userId: Telegram.WebApp.initDataUnsafe.user?.id || 'guest', // Telegram ID пользователя
+        score,
+        totalScore,
+        level,
+        pointsToNextLevel,
+        timestamp: new Date().toISOString()
+      };
+
+      try {
+        const response = await fetch(serverUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+          console.error('Ошибка при сохранении данных:', response.statusText);
+        } else {
+          console.log('Данные успешно сохранены в Excel.');
+        }
+      } catch (error) {
+        console.error('Ошибка при соединении с сервером:', error);
+      }
+    }
+
+    // Функция обновления кнопки Telegram
+    function updateMainButton() {
+      Telegram.WebApp.MainButton.text = `Общая сумма очков: ${totalScore}`;
+      Telegram.WebApp.MainButton.show();
+    }
+
+    // Обработчик кликов на кнопку
+    clickButton.addEventListener('click', () => {
+      score++;
+      totalScore++;
+      pointsToNextLevel--;
+
+      // Обновление очков и интерфейса
+      scoreElement.textContent = score;
+      totalScoreElement.textContent = totalScore;
+      nextLevelPointsElement.textContent = pointsToNextLevel;
+
+      // Проверка на повышение уровня
+      if (pointsToNextLevel === 0) {
+        level++;
+        pointsToNextLevel = level * 10; // Увеличиваем требуемые очки для следующего уровня
+        levelElement.textContent = level;
+        nextLevelPointsElement.textContent = pointsToNextLevel;
+      }
+
+      // Сохранение данных в Excel
+      saveDataToExcel();
+
+      // Обновление кнопки Telegram
+      updateMainButton();
+    });
+
+    // Показываем основную кнопку при запуске
+    updateMainButton();
+  </script>
+</body>
+</html>
