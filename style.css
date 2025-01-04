@@ -8,7 +8,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #f0f4f8;
-    background-image: url('background.jpg'); /* Путь к фоновому изображению */
+    background-image: url('background.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -18,8 +18,9 @@ body {
     height: 100vh;
     overflow: hidden;
     color: #fff;
-    touch-action: manipulation;  /* Отключаем масштабирование на мобильных устройствах */
-    user-select: none; /* Отключаем выделение текста */
+    touch-action: manipulation;
+    user-select: none;
+    flex-direction: column;
 }
 
 /* Контейнер игры */
@@ -28,20 +29,26 @@ body {
     position: relative;
     max-width: 100%;
     max-height: 100%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 /* Картинка сверху */
 #top-image {
     width: 100%;
-    max-width: 600px;
-    margin-bottom: 20px;
+    max-width: 800px;
+    margin-bottom: 40px;
     border-radius: 10px;
+    align-self: center;
 }
 
 /* Счетчик кликов */
 #coins {
-    font-family: 'DynaPuff', sans-serif;  /* Применение шрифта */
-    font-size: 3rem;
+    font-family: 'DynaPuff', sans-serif;
+    font-size: 10rem;
     font-weight: 700;
     margin-bottom: 30px;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
@@ -49,14 +56,14 @@ body {
 
 /* Монетка, по которой кликают */
 #click-image {
-    width: 500px;  /* Размер монеты */
-    height: 500px;  /* Размер монеты */
+    width: 600px;
+    height: 600px;
     cursor: pointer;
     border-radius: 50%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: block;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 #click-image:hover {
@@ -64,82 +71,63 @@ body {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Картинка для открытия меню */
-#referral-button {
-    width: 100px;
-    height: 100px;
-    cursor: pointer;
-    margin-top: 30px;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-    display: block;
-    margin: 20px auto;
-}
-
-#referral-button:hover {
-    transform: scale(1.1);
-}
-
-/* Новая кнопка профиля */
-#profile-button {
-    width: 100px;
-    height: 100px;
-    cursor: pointer;
-    margin-top: 30px;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-    display: block;
-    margin: 20px auto;
-}
-
-#profile-button:hover {
-    transform: scale(1.1);
-}
-
-/* Меню для реферальной ссылки */
-#referral-menu {
-    display: none;
+/* Вкладки */
+#tabs-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
     margin-top: 20px;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 8px;
-    animation: slideIn 0.3s ease;
-}
-
-.referral-option {
-    font-size: 1.2rem;
-    color: #fff;
-    margin: 10px 0;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.referral-option:hover {
-    color: #28a745;
-}
-
-/* Модальное окно с профилем */
-.modal {
-    display: none;
     position: fixed;
-    z-index: 1;
+    bottom: 0;
     left: 0;
-    top: 0;
+    right: 0;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.tab-button {
+    background-color: transparent; /* Прозрачный фон */
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    flex: 1 1 10%;
+    margin: 0 5px;
+    position: relative;
+}
+
+.tab-button img {
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Полупрозрачный фон */
+    object-fit: cover; /* Изображение занимает всю кнопку, сохраняя пропорции */
 }
 
-.modal-content {
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border-radius: 10px;
-    width: 80%;
+.tab-button:hover {
+    background-color: #555;
+}
+
+/* Контент вкладок */
+#tabs-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.tab-content {
+    display: none;
     text-align: center;
-    color: #333;
 }
 
+#menu-content {
+    display: block;
+}
+
+/* Модальные элементы */
 #profile-avatar {
     width: 100px;
     height: 100px;
@@ -160,7 +148,7 @@ body {
 
 #referral-copy-btn,
 #referral-share-btn {
-    padding: 10px;
+    padding: 12px;
     background-color: #28a745;
     color: white;
     border: none;
@@ -175,44 +163,144 @@ body {
     background-color: #218838;
 }
 
-/* Анимация появления меню */
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Социальные сети */
+#social-content ul {
+    list-style: none;
+    padding: 0;
 }
 
-/* Мобильная версия */
+#social-content ul li {
+    margin: 10px 0;
+}
+
+#social-content ul li a {
+    color: #28a745;
+    text-decoration: none;
+}
+
+#social-content ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Стили для мобильных устройств */
 @media (max-width: 600px) {
-    #top-image {
-        width: 80%;
-        max-width: 250px;
+    .tab-button {
+        font-size: 0.9rem;
+        padding: 0;
+        margin: 0 3px;
+        min-width: 90px;
+        height: 80px; /* Установим фиксированную высоту */
+    }
+
+    .tab-button img {
+        width: 100%;
+        height: 100%;
     }
 
     #coins {
-        font-size: 2.5rem;
+        font-size: 6rem;
     }
 
     #click-image {
-        width: 200px;
-        height: 200px;
+        width: 400px;
+        height: 400px;
     }
 
-    #referral-button {
-        width: 40px;
-        height: 40px;
+    #profile-avatar {
+        width: 80px;
+        height: 80px;
+    }
+    
+    #profile-username,
+    #profile-coins,
+    #profile-start-date,
+    #profile-rank {
+        font-size: 0.8rem;
     }
 
-    #referral-menu {
+    #tabs-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        z-index: 100;
+    }
+
+    .tab-button {
+        flex: 1 1 30%;
+        min-width: 100px;
+    }
+}
+
+/* Стили для планшетов */
+@media (max-width: 1024px) and (min-width: 601px) {
+    .tab-button {
         font-size: 1rem;
+        padding: 0;
+        margin: 0 5px;
     }
 
-    #leaderboard-list li {
+    .tab-button img {
+        width: 100%;
+        height: 100%;
+    }
+
+    #referral-copy-btn,
+    #referral-share-btn {
         font-size: 1rem;
+        padding: 12px;
+    }
+
+    #coins {
+        font-size: 8rem;
+    }
+
+    #click-image {
+        width: 500px;
+        height: 500px;
+    }
+
+    #profile-avatar {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+/* Стили для десктопов */
+@media (min-width: 1025px) {
+    .tab-button {
+        font-size: 1.3rem;
+        padding: 0;
+        margin: 0 10px;
+    }
+
+    .tab-button img {
+        width: 100%;
+        height: 100%;
+    }
+
+    #referral-copy-btn,
+    #referral-share-btn {
+        font-size: 1.2rem;
+        padding: 15px;
+    }
+
+    #coins {
+        font-size: 10rem;
+    }
+
+    #click-image {
+        width: 600px;
+        height: 600px;
+    }
+
+    #profile-avatar {
+        width: 100px;
+        height: 100px;
     }
 }
