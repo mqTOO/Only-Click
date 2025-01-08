@@ -11,7 +11,6 @@ const tg = window.Telegram.WebApp;
 tg.init();
 tg.expand(); // Разворачиваем на весь экран
 
-
 // Функция создания пузыря
 function createBubble() {
     const bubble = document.createElement('div');
@@ -25,7 +24,7 @@ function createBubble() {
     bubble.style.left = `${leftPosition}%`;
 
     // Рассчитываем скорость подъема пузыря. Чем больше пузырей, тем быстрее он будет подниматься
-    const speed = 50 - bubbleCount * 0.1; // Начальная скорость 5 секунд, уменьшаем на 0.1 с каждым новым пузырем
+    const speed = 5 - bubbleCount * 0.1; // Начальная скорость 5 секунд, уменьшаем на 0.1 с каждым новым пузырем
     if (speed < 1) {
         bubble.style.animationDuration = '1s'; // Минимальное время подъема 1 секунда
     } else {
@@ -53,14 +52,19 @@ function createBubble() {
 // Создаем пузыри каждые 1.5 секунды
 let bubbleInterval;
 
-document.getElementById('start-btn').addEventListener('click', () => {
+// Добавляем поддержку тач-событий
+document.getElementById('start-btn').addEventListener('click', startGame);
+document.getElementById('start-btn').addEventListener('touchstart', startGame);
+
+// Функция начала игры
+function startGame() {
     // Прячем меню и показываем игру
     document.getElementById('menu').style.display = 'none';
     document.getElementById('game').style.display = 'block';
 
     // Запускаем создание пузырей
-    bubbleInterval = setInterval(createBubble, 100);
-});
+    bubbleInterval = setInterval(createBubble, 1500);
+}
 
 // Останавливаем игру
 function stopGame() {
