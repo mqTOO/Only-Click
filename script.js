@@ -1,8 +1,9 @@
-// Подключаем Telegram Web App SDK
+// Инициализация Telegram Web App
 const tg = window.Telegram.WebApp;
 
-window.Telegram.WebApp.ready();
-window.Telegram.WebApp.disableVerticalSwipes();
+// Ожидаем инициализацию SDK и включаем полноэкранный режим
+tg.ready();
+
 
 // Функции работы с игрой
 let score = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0;
