@@ -9,9 +9,6 @@ const tg = window.Telegram.WebApp;
 tg.ready();
 
 
-// Ожидаем, что Telegram Web App будет готов к взаимодействию
-tg.expand(); // Полноэкранный режим
-
 // Функция создания пузыря
 function createBubble() {
     const bubble = document.createElement('div');
