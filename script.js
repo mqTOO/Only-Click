@@ -1,10 +1,11 @@
-// Инициализация Telegram Web App
+// Подключаем Telegram Web App SDK
 const tg = window.Telegram.WebApp;
 
-tg.ready(); // Ожидаем инициализацию SDK
+// Инициализация Telegram Web App
+tg.ready(); // Подготовка к использованию Telegram API
 
-// Настроим полноэкранный режим
-tg.expand(); // Telegram Web App будет открыт на весь экран
+// Ожидаем, что SDK Telegram будет полностью готов
+tg.expand(); // Открытие на весь экран в Telegram Web App
 
 // Функции работы с игрой
 let score = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0;
