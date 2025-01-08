@@ -4,12 +4,9 @@ scoreElement.textContent = `Счет: ${score}`;
 
 let bubbleCount = 0; // Счётчик пузырей
 
-// Подключаем Telegram Web App
+// Инициализация Telegram Web App
 const tg = window.Telegram.WebApp;
 
-// Инициализируем Telegram Web App
-tg.init();
-tg.expand(); // Разворачиваем на весь экран
 
 // Функция создания пузыря
 function createBubble() {
@@ -23,7 +20,7 @@ function createBubble() {
     bubble.style.height = `${size}px`;
     bubble.style.left = `${leftPosition}%`;
 
-    // Рассчитываем скорость подъема пузыря. Чем больше пузырей, тем быстрее он будет подниматься
+    // Рассчитываем скорость подъема пузыря
     const speed = 5 - bubbleCount * 0.1; // Начальная скорость 5 секунд, уменьшаем на 0.1 с каждым новым пузырем
     if (speed < 1) {
         bubble.style.animationDuration = '1s'; // Минимальное время подъема 1 секунда
@@ -49,22 +46,20 @@ function createBubble() {
     bubbleCount++; // Увеличиваем счетчик пузырей
 }
 
-// Создаем пузыри каждые 1.5 секунды
 let bubbleInterval;
 
-// Добавляем поддержку тач-событий
-document.getElementById('start-btn').addEventListener('click', startGame);
-document.getElementById('start-btn').addEventListener('touchstart', startGame);
-
-// Функция начала игры
+// Добавляем обработчики событий для кнопки "Начать игру"
 function startGame() {
-    // Прячем меню и показываем игру
-    document.getElementById('menu').style.display = 'none';
-    document.getElementById('game').style.display = 'block';
+    document.getElementById('menu').style.display = 'none';  // Скрываем меню
+    document.getElementById('game').style.display = 'block';  // Показываем игру
 
     // Запускаем создание пузырей
     bubbleInterval = setInterval(createBubble, 1500);
 }
+
+// Обработчик для кнопки "Начать игру"
+document.getElementById('start-btn').addEventListener('click', startGame);
+document.getElementById('start-btn').addEventListener('touchstart', startGame); // Для мобильных устройств
 
 // Останавливаем игру
 function stopGame() {
