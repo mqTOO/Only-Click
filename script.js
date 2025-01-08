@@ -4,6 +4,7 @@ const tg = window.Telegram.WebApp;
 // Ожидаем инициализацию SDK и включаем полноэкранный режим
 tg.ready();
 tg.expand();  // Telegram Web App будет открыт на весь экран
+tg.requestFullScreen();
 
 // Функции работы с игрой
 let score = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0;
