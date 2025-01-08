@@ -6,7 +6,10 @@ let bubbleCount = 0; // Счётчик пузырей
 
 // Инициализация Telegram Web App
 const tg = window.Telegram.WebApp;
+tg.init();
 
+// Ожидаем, что Telegram Web App будет готов к взаимодействию
+tg.expand(); // Полноэкранный режим
 
 // Функция создания пузыря
 function createBubble() {
