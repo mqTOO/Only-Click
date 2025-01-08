@@ -11,10 +11,10 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #f0f8ff;
-    background-image: url('images/background.png'); /* Устанавливаем изображение фона */
+    background-image: url('images/background.png');
     background-size: cover;
     background-position: center;
-    overflow: hidden; /* Отключаем скроллинг */
+    overflow: hidden;
 }
 
 #game-container {
@@ -48,7 +48,6 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    z-index: 10; /* Убедитесь, что кнопка будет сверху */
 }
 
 #game {
@@ -78,16 +77,21 @@ body {
     animation: bubble-move 5s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
 }
 
+.bonus {
+    background-image: url('images/bonus-bubble.png'); /* Добавьте уникальное изображение для бонусных пузырей */
+    border: 3px solid gold; /* Сделаем бонусные пузыри золотыми */
+    animation-duration: 4s; /* Более быстрые бонусы */
+}
+
 @keyframes bubble-move {
     from {
-        transform: translateY(100vh); /* Начинаем анимацию снизу */
+        transform: translateY(100vh);
     }
     to {
-        transform: translateY(-100vh); /* Двигаем пузырь вверх за пределы экрана */
+        transform: translateY(-100vh);
     }
 }
 
-/* Мобильная адаптивность */
 @media (max-width: 768px) {
     #score {
         font-size: 18px;
@@ -101,7 +105,6 @@ body {
     }
 }
 
-/* Для очень маленьких экранов */
 @media (max-width: 480px) {
     #score {
         font-size: 16px;
@@ -113,4 +116,27 @@ body {
         width: 35px;
         height: 35px;
     }
+}
+#timer {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+}
+
+#end-screen {
+    text-align: center;
+    color: white;
+}
+
+#restart-btn, #back-to-menu-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #0088cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
