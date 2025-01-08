@@ -8,8 +8,6 @@ let bubbleCount = 0; // Счётчик пузырей
 const tg = window.Telegram.WebApp;
 
 // Инициализируем Telegram Web App
-tg.init();
-tg.expand(); // Разворачиваем на весь экран
 
 // Функция создания пузыря
 function createBubble() {
