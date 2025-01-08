@@ -10,12 +10,25 @@
 </head>
 <body>
     <div id="game-container">
+        <!-- Главное меню -->
         <div id="menu">
-            <h1>Добро пожаловать в игру с пузырями!</h1>
+            <h1>BLYP!</h1>
             <button id="start-btn">Начать игру</button>
         </div>
+
+        <!-- Экран игры -->
         <div id="game" style="display: none;">
             <div id="score">Счет: 0</div>
+            <div id="timer">Осталось: 45 секунд</div>
+        </div>
+
+        <!-- Экран окончания игры -->
+        <div id="end-screen" style="display: none;">
+            <h2>Игра завершена!</h2>
+            <p id="final-score">Вы поймали 0 пузырей!</p>
+            <p id="best-score">Всего пузерей: 0</p>
+            <button id="restart-btn" onclick="restartGame()">Начать заново</button>
+            <button id="back-to-menu-btn">На начальный экран</button>
         </div>
     </div>
 
