@@ -48,6 +48,7 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    z-index: 10; /* Убедитесь, что кнопка будет сверху */
 }
 
 #game {
