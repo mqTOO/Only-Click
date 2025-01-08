@@ -3,7 +3,7 @@ const tg = window.Telegram.WebApp;
 
 // Ожидаем инициализацию SDK и включаем полноэкранный режим
 tg.ready();
-
+tg.expand();  // Telegram Web App будет открыт на весь экран
 
 // Функции работы с игрой
 let score = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0;
@@ -25,7 +25,7 @@ function createBubble() {
     bubble.style.left = `${leftPosition}%`;
 
     // Рассчитываем скорость подъема пузыря
-    const speed = 5 - bubbleCount * 0.1; // Начальная скорость 5 секунд, уменьшаем на 0.1 с каждым новым пузырем
+    const speed = 50 - bubbleCount * 0.1; // Начальная скорость 5 секунд, уменьшаем на 0.1 с каждым новым пузырем
     if (speed < 1) {
         bubble.style.animationDuration = '1s'; // Минимальное время подъема 1 секунда
     } else {
@@ -58,7 +58,7 @@ function startGame() {
     document.getElementById('game').style.display = 'block';  // Показываем игру
 
     // Запускаем создание пузырей
-    bubbleInterval = setInterval(createBubble, 1500);
+    bubbleInterval = setInterval(createBubble, 1000);
 }
 
 // Обработчики событий для кнопки "Начать игру"
