@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, minimum-scale=1">
+    <meta name="theme-color" content="#0088cc"> <!-- Цвет для Telegram Web App -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>BLYP Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-background"></div> <!-- Фон игры -->
+    <div id="menu-background"></div> <!-- Фон главного меню -->
+    
+    <div id="game-container">
+        <!-- Главное меню -->
+        <div id="menu">
+            <h1>BLYP!</h1>
+            <div id="total-bubbles">
+                <img src="images/bubble-icon.png" alt="Bubble Icon" class="icon">
+                <span>0</span>
+            </div> <!-- Счётчик собранных пузырей с иконкой -->
+			<table>
+				<tr>
+					<td>	
+						<button id="start-btn">Начать игру</button>
+						<button id="referral-btn">Рефералы</button> <!-- Кнопка рефералов -->
+					</td>
+				</tr>
+			</table>
+        </div>
+
+        <!-- Экран рефералов -->
+        <div id="referral-screen" style="display: none;">
+            <h2>Реферальная ссылка</h2>
+            <p id="referral-link">https://t.me/your_telegram_bot?start=referral_code</p> <!-- Ссылка для рефералов -->
+            <button id="copy-link-btn">Скопировать ссылку</button>
+            <button id="share-link-btn">Поделиться</button>
+            <button id="back-to-menu-btn">Назад</button>
+        </div>
+
+        <!-- Экран игры -->
+        <div id="game" style="display: none;">
+            <div id="score">Счет: 0</div>
+            <div id="timer">
+                <img src="images/clock-icon.png" alt="Clock Icon" class="icon">
+                <span>45 секунд</span>
+            </div> <!-- Таймер с иконкой часов -->
+            <button id="pause-btn">Пауза</button> <!-- Кнопка паузы -->
+        </div>
+
+        <!-- Экран паузы -->
+        <div id="pause-screen" style="display: none;">
+            <h2>Пауза</h2>
+            <button id="resume-btn">Продолжить игру</button>
+            <button id="exit-to-menu-btn">Выход в меню</button>
+        </div>
+
+        <!-- Экран окончания игры -->
+        <div id="end-screen" style="display: none;">
+            <h2>Игра завершена!</h2>
+            <p id="final-score">Вы поймали 0 пузырей!</p>
+            <p id="best-score">Лучший результат: 0</p>
+            <button id="restart-btn" onclick="restartGame()">Начать заново</button>
+            <button id="back-to-menu-btn">На начальный экран</button>
+        </div>
+    </div>
+
+    <!-- Подключение Telegram Web App SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
