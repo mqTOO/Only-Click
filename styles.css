@@ -1,0 +1,283 @@
+/* Основные стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #6e7dff, #4a90e2);
+    color: #fff;
+    overflow: hidden;
+}
+
+#game-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* Фоны */
+#menu-background, #game-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+#menu-background {
+    background-image: url('images/menu-background.png');
+    filter: blur(5px);
+}
+
+#game-background {
+    background-image: url('images/game-background.png');
+    filter: blur(5px);
+}
+
+/* Главное меню */
+#menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#menu h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#start-btn {
+    padding: 15px 25px;
+    font-size: 1.2rem;
+    background-color: #0088cc;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#start-btn:hover {
+    background-color: #0077b3;
+}
+
+#total-bubbles {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Экран игры */
+#game {
+    display: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    top: 0;
+}
+
+#score, #timer {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+#score {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+#timer {
+    position: absolute;
+    top: 20px;
+    right: 200px;
+}
+
+#total-bubbles {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: white;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+}
+
+.bubble-icon {
+    width: 30px;  /* Размер пузыря */
+    height: 30px;  /* Высота пузыря */
+    margin-right: 10px;  /* Отступ между иконкой и числом */
+}
+
+#bubble-count {
+    font-weight: bold;  /* Чтобы число было жирным */
+}
+
+.bubble {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    animation: bubble-move 5s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+    border-radius: 50%; /* Для всех пузырей, включая обычные и бонусные */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Добавим тень для пузырей */
+}
+
+.bubble:hover {
+    opacity: 0.8;
+}
+
+.bubble.normal {
+    background-image: url('images/normal-bubble.png'); /* Путь к изображению обычного пузыря */
+}
+.bonus {
+    background-image: url('images/bonus-bubble.png');
+    border: 3px solid gold;
+    animation-duration: 4s;
+}
+
+@keyframes bubble-move {
+    from {
+        transform: translateY(100vh);
+    }
+    to {
+        transform: translateY(-100vh);
+    }
+}
+
+/* Пауза и конец игры */
+#pause-btn, #restart-btn, #back-to-menu-btn, #resume-btn, #exit-to-menu-btn {
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    background-color: #ffcc00;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#pause-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #ff6600;
+}
+
+#pause-btn:hover {
+    background-color: #e55c00;
+}
+
+#pause-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    border-radius: 15px;
+    z-index: 20;
+}
+
+#pause-screen button {
+    margin-top: 15px;
+}
+
+#end-screen {
+    text-align: center;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+#final-score, #best-score {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+#restart-btn:hover, #back-to-menu-btn:hover, #resume-btn:hover, #exit-to-menu-btn:hover {
+    background-color: #0066cc;
+}
+
+@media (max-width: 768px) {
+    #menu h1 {
+        font-size: 2rem;
+    }
+
+    #start-btn {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+
+    #score, #timer {
+        font-size: 1.2rem;
+    }
+
+    .bubble {
+        width: 40px;
+        height: 40px;
+    }
+
+    #pause-btn, #restart-btn, #back-to-menu-btn, #resume-btn, #exit-to-menu-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #menu h1 {
+        font-size: 1.5rem;
+    }
+
+    #start-btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+
+    .bubble {
+        width: 35px;
+        height: 35px;
+    }
+
+    #score, #timer {
+        font-size: 1rem;
+    }
+
+    #pause-btn, #restart-btn, #back-to-menu-btn, #resume-btn, #exit-to-menu-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}
