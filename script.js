@@ -7,6 +7,8 @@ tg.ready();
 // Включаем полноэкранный режим после готовности Telegram Web App
 tg.expand();  // Telegram Web App будет открыт на весь экран
 
+tg.RequestFullscreen();
+
 // Звуковые эффекты
 const bubbleSound = new Audio('sounds/pop.mp3'); // Путь к звуковому файлу пузыря
 const gameOverSound = new Audio('sounds/gameover.mp3'); // Путь к звуковому файлу окончания игры
