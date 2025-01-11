@@ -62,7 +62,8 @@ document.getElementById('referral-btn').addEventListener('click', () => {
 
     // Обработчик для кнопки "Поделиться"
     document.getElementById('share-link-btn').addEventListener('click', () => {
-        tg.shareMessage(referralLink);  // Открываем диалог для поделиться через Telegram
+        const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}`; // Ссылка для поделиться через Telegram
+        tg.openLink(shareUrl);
     });
 });
 
