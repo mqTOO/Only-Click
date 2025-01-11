@@ -62,7 +62,7 @@ document.getElementById('referral-btn').addEventListener('click', () => {
 
     // Обработчик для кнопки "Поделиться"
     document.getElementById('share-link-btn').addEventListener('click', () => {
-        tg.Share.shareText(referralLink);  // Открываем диалог для поделиться через Telegram
+        tg.shareURL('https://t.me/heyqbnk', 'Check out this cool group!');  // Открываем диалог для поделиться через Telegram
     });
 });
 
