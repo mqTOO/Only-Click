@@ -4,10 +4,67 @@ const tg = window.Telegram.WebApp;
 // Ожидаем полной инициализации SDK
 tg.ready();
 
-// Включаем полноэкранный режим после готовности Telegram Web App
-tg.expand();  // Telegram Web App будет открыт на весь экран
+// Включаем полноэкранный режим
+tg.expand();
 
-tg.requestFullscreen();		// Максимально большой экран
+// Универсальные функции для анимации
+function showElementWithAnimation(elementId) {
+    const element = document.getElementById(elementId);
+
+    // Убираем изначальную скрытость и добавляем класс анимации
+    element.classList.remove('hidden', 'fade-out');
+    element.classList.add('animated', 'fade-in');
+
+    // Удаляем класс анимации после её завершения
+    setTimeout(() => {
+        element.classList.remove('animated', 'fade-in');
+    }, 400); // Время совпадает с animation-duration
+}
+
+function hideElementWithAnimation(elementId) {
+    const element = document.getElementById(elementId);
+
+    // Добавляем класс анимации скрытия
+    element.classList.add('animated', 'fade-out');
+
+    // После завершения анимации скрываем элемент
+    setTimeout(() => {
+        element.classList.add('hidden');
+        element.classList.remove('animated', 'fade-out');
+    }, 400); // Время совпадает с animation-duration
+}
+
+
+// Обработчики кнопок
+document.getElementById('start-btn').addEventListener('click', () => {
+    hideElementWithAnimation('menu');
+    showElementWithAnimation('game');
+});
+
+document.getElementById('referral-btn').addEventListener('click', () => {
+    hideElementWithAnimation('menu');
+    showElementWithAnimation('referral-screen');
+});
+
+document.getElementById('back-to-menu-btn').addEventListener('click', () => {
+    hideElementWithAnimation('referral-screen');
+    showElementWithAnimation('menu');
+});
+
+document.getElementById('pause-btn').addEventListener('click', () => {
+    hideElementWithAnimation('game');
+    showElementWithAnimation('pause-screen');
+});
+
+document.getElementById('resume-btn').addEventListener('click', () => {
+    hideElementWithAnimation('pause-screen');
+    showElementWithAnimation('game');
+});
+
+document.getElementById('exit-to-menu-btn').addEventListener('click', () => {
+    hideElementWithAnimation('pause-screen');
+    showElementWithAnimation('menu');
+});
 
 // Звуковые эффекты
 const bubbleSound = new Audio('sounds/pop.mp3'); // Путь к звуковому файлу пузыря
@@ -32,7 +89,7 @@ let timerInterval;
 let levelInterval = 1000; // Интервал для создания пузырей
 
 // Обновление счётчика собранных пузырей в главном меню
-totalBubblesElement.textContent = `Собрано пузырей: ${totalBubbles}`;
+totalBubblesElement.textContent = `${totalBubbles}`;
 
 // Функция создания реферальной ссылки
 function generateReferralLink() {
