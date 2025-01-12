@@ -16,10 +16,24 @@
         <!-- Главное меню -->
         <div id="menu">
             <h1>BLYP!</h1>
-            <div id="total-bubbles">
-                <img src="images/bubble-icon.png" alt="Bubble Icon" class="icon">
-                <span>0</span>
-            </div> <!-- Счётчик собранных пузырей с иконкой -->
+			<p>BLYP! BLYP! BLYP! BLYP! BLYP! BLYP!</p>
+			<table>
+				<tr>
+					<td>
+						<div id="total-bubbles">
+							<span>0</span>
+						</div> <!-- Счётчик собранных пузырей с иконкой -->
+					</td>
+					<td>
+						<img src="images/bubble-icon.png" alt="Bubble Icon" class="icon-menu">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h1></h1>
+					</td>
+				</tr>
+			</table>
 			<table>
 				<tr>
 					<td>	
@@ -33,7 +47,7 @@
         <!-- Экран рефералов -->
         <div id="referral-screen" style="display: none;">
             <h2>Реферальная ссылка</h2>
-            <p id="referral-link">https://t.me/your_telegram_bot?start=referral_code</p> <!-- Ссылка для рефералов -->
+            <h2 id="referral-link">https://t.me/your_telegram_bot?start=referral_code</h2> <!-- Ссылка для рефералов -->
             <button id="copy-link-btn">Скопировать ссылку</button>
             <button id="share-link-btn">Поделиться</button>
             <button id="back-to-menu-btn">Назад</button>
@@ -59,8 +73,8 @@
         <!-- Экран окончания игры -->
         <div id="end-screen" style="display: none;">
             <h2>Игра завершена!</h2>
-            <p id="final-score">Вы поймали 0 пузырей!</p>
-            <p id="best-score">Лучший результат: 0</p>
+            <h2 id="final-score">Вы поймали 0 пузырей!</h2>
+            <h2 id="best-score">Лучший результат: 0</h2>
             <button id="restart-btn" onclick="restartGame()">Начать заново</button>
             <button id="back-to-menu-btn">На начальный экран</button>
         </div>
