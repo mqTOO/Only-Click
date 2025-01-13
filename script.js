@@ -88,7 +88,7 @@ let bubbleCount = 0; // Счётчик пузырей
 let caughtBubbles = 0; // Счётчик пойманных пузырей
 let gameTime = 45; // Таймер игры, 45 секунд
 let timerInterval;
-let levelInterval = 1000; // Интервал для создания пузырей
+let levelInterval = 500; // Интервал для создания пузырей
 
 // Обновление счётчика собранных пузырей в главном меню
 totalBubblesElement.textContent = `${totalBubbles}`;
@@ -188,7 +188,7 @@ function createBubble() {
     }
 
     // Рассчитываем скорость подъема пузыря
-    const speed = 50 - bubbleCount - 3; // Начальная скорость 5 секунд, уменьшаем на 0.1 с каждым новым пузырем
+    const speed = 60; // Начальная скорость 5 секунд, уменьшаем на 0.1 с каждым новым пузырем
     if (speed < 1) {
         bubble.style.animationDuration = '1s'; // Минимальное время подъема 1 секунда
     } else {
@@ -209,7 +209,7 @@ function createBubble() {
 function updateLevel() {
     if (caughtBubbles >= level * 10) {  // Каждые 10 пойманных пузырей повышаем уровень
         level++;  // Увеличиваем уровень
-        levelInterval = Math.max(1000 - level * 100, 200);  // Уменьшаем интервал появления пузырей (не меньше 200 мс)
+        levelInterval = 1000;  // Уменьшаем интервал появления пузырей (не меньше 200 мс)
 	console.log(`Уровень повышен до ${level}`);  // Для отладки
     }
 }
