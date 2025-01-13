@@ -37,8 +37,8 @@
 			<table>
 				<tr>
 					<td>	
-						<button id="start-btn">Начать игру</button>
-						<button id="referral-btn">Рефералы</button> <!-- Кнопка рефералов -->
+						<button id="start-btn">Играть</button>
+						<button id="referral-btn">Друзья</button> <!-- Кнопка рефералов -->
 					</td>
 				</tr>
 			</table>
@@ -55,28 +55,52 @@
 
         <!-- Экран игры -->
         <div id="game" style="display: none;">
-            <div id="score">Счет: 0</div>
-            <div id="timer">
-                <img src="images/clock-icon.png" alt="Clock Icon" class="icon">
-                <span>45 секунд</span>
-            </div> <!-- Таймер с иконкой часов -->
-            <button id="pause-btn">Пауза</button> <!-- Кнопка паузы -->
+
+			<div id="score">
+				<img src="images/bubble-icon.png" alt="Bubble Icon" class="icon">
+				<span>0</span>
+			</div> <!-- Счётчик собранных пузырей с иконкой -->
+			
+			<button id="pause-btn">
+				<div id="timer">
+				<table>
+					<tr>
+						<td>
+							<img src="images/clock-icon.png" alt="Clock Icon" class="icon-time">
+						</td>
+						<td>
+							<span>00:45</span>
+						</td>
+					</tr>
+				</table>
+				</div>
+			</button>
         </div>
 
         <!-- Экран паузы -->
         <div id="pause-screen" style="display: none;">
             <h2>Пауза</h2>
-            <button id="resume-btn">Продолжить игру</button>
-            <button id="exit-to-menu-btn">Выход в меню</button>
+            <button id="resume-btn">Продолжить</button>
+            <button id="exit-to-menu-btn">Меню</button>
         </div>
 
         <!-- Экран окончания игры -->
         <div id="end-screen" style="display: none;">
-            <h2>Игра завершена!</h2>
-            <h2 id="final-score">Вы поймали 0 пузырей!</h2>
-            <h2 id="best-score">Лучший результат: 0</h2>
-            <button id="restart-btn" onclick="restartGame()">Начать заново</button>
-            <button id="back-to-menu-btn">На начальный экран</button>
+            <h2>Великолепно!</h2>
+			<table>
+				<tr>
+					<td>
+						<img src="images/bubble-icon.png" alt="Bubble Icon" class="icon">
+					</td>
+					<td>
+						<h1 id="final-score">0</h1>
+					</td>
+				</tr>
+			</table>
+            
+            <h2 id="best-score">Рекорд: 0</h2>
+            <button id="restart-btn" onclick="restartGame()">Играть</button>
+            <button id="exit-to-menu-btn">Меню</button>
         </div>
     </div>
 
