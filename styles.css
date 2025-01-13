@@ -40,13 +40,13 @@ body {
 }
 
 #menu-background {
-    background-image: url('images/menu-background.png');
+    background-image: url('images/menu-background.gif');
     filter: blur(5px);
 }
 
 #game-background {
-    background-image: url('images/game-background.png');
-    filter: blur(5px);
+    background-image: url('images/game-background.jpg');
+    filter: blur(0px);
 }
 
 /* Главное меню */
@@ -105,7 +105,7 @@ body {
 #start-btn {
     padding: 15px 25px;
     font-size: 1.2rem;
-    background-color: #0088cc;
+    background-color: rgba(123, 0, 194, 1);
     color: white;
     border: none;
     border-radius: 50px;
@@ -115,7 +115,7 @@ body {
 }
 
 #start-btn:hover {
-    background-color: #0077b3;
+    background-color: rgba(76, 0, 120, 1);
 }
 
 #total-bubbles {
@@ -172,6 +172,7 @@ body {
 .icon-menu {
     width: 60px;
     height: 60px;
+	text-align: center;
 }
 
 .bubble-icon {
@@ -192,7 +193,7 @@ body {
     background-position: center;
     animation: bubble-move 5s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
     border-radius: 50%; /* Для всех пузырей, включая обычные и бонусные */
-    box-shadow: 0 0 15px rgba(0, 200, 255, 1); /* Добавим тень для пузырей */
+    /*box-shadow: 0 0 15px rgba(0, 200, 255, 1); /* Добавим тень для пузырей */
 }
 
 .bubble.normal {
@@ -207,7 +208,7 @@ body {
     background-position: center;
     animation: bubble-move 5s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
     border-radius: 50%; /* Для всех пузырей, включая обычные и бонусные */
-    box-shadow: 0 0 15px rgba(255, 230, 0, 1); /* Добавим тень для пузырей */
+    /*box-shadow: 0 0 15px rgba(255, 230, 0, 1); /* Добавим тень для пузырей */
     animation-duration: 4s;
 }
 
@@ -224,7 +225,7 @@ body {
 #restart-btn, #back-to-menu-btn, #resume-btn, #exit-to-menu-btn {
     padding: 12px 25px;
     font-size: 1.1rem;
-    background-color: #ffcc00;
+    background-color: rgba(123, 0, 194, 1);
     color: white;
     border: none;
     border-radius: 50px;
@@ -274,7 +275,7 @@ body {
 }
 
 #restart-btn:hover, #back-to-menu-btn:hover, #resume-btn:hover, #exit-to-menu-btn:hover {
-    background-color: #0066cc;
+    background-color: rgba(76, 0, 120, 1);
 }
 
 @media (max-width: 600px) {
@@ -309,7 +310,7 @@ body {
     margin-top: 10px;
     padding: 10px 20px;
     font-size: 1.1rem;
-    background-color: #ffcc00;
+    background-color: rgba(123, 0, 194, 1);
     color: white;
     border: none;
     border-radius: 50px;
@@ -317,13 +318,13 @@ body {
 }
 
 #referral-screen button:hover {
-    background-color: #ff9900;
+    background-color: rgba(76, 0, 120, 1);
 }
 
 #referral-btn {
     padding: 15px 25px;
     font-size: 1.2rem;
-    background-color: #0088cc;
+    background-color: rgba(123, 0, 194, 1);
     color: white;
     border: none;
     border-radius: 50px;
@@ -333,32 +334,7 @@ body {
 }
 
 #referral-btn:hover {
-    background-color: #0077b3;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #000;
-}
-
-p {
-  position: relative;
-  font-family: sans-serif;
-  text-transform: uppercase;
-  font-size: 2em;
-  letter-spacing: 4px;
-  overflow: hidden;
-  background: linear-gradient(90deg, #000, #fff, #000);
-  background-repeat: no-repeat;
-  background-size: 80%;
-  animation: animate 3s linear infinite;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+    background-color: rgba(76, 0, 120, 1);
 }
 
 @keyframes animate {
