@@ -7,7 +7,7 @@ tg.ready();
 // Включаем полноэкранный режим
 tg.expand();
 
-tg.requestFullscreen();		// Максимально большой экран
+//tg.requestFullscreen();		// Максимально большой экран
 
 // Универсальные функции для анимации
 function showElementWithAnimation(elementId) {
@@ -159,12 +159,12 @@ function createBubble() {
             bubble.style.pointerEvents = 'none'; // Блокируем клик по пузырю
             bonusSound.play(); // Проигрываем бонусный звук
             score += 5; // Добавляем бонусные очки
-            caughtBubbles++; // Увеличиваем количество пойманных пузырей
+            caughtBubbles += 5; // Увеличиваем количество пойманных пузырей
             totalBubbles++; // Увеличиваем количество собранных пузырей
             localStorage.setItem('score', score); // Сохраняем счет
             localStorage.setItem('totalBubbles', totalBubbles); // Сохраняем собранные пузырь
-            scoreElement.textContent = `Счет: ${score}`;
-            totalBubblesElement.textContent = `Собрано пузырей: ${totalBubbles}`;
+            scoreElement.querySelector('span').textContent = `${caughtBubbles}`;
+            totalBubblesElement.textContent = `${totalBubbles}`;
             setTimeout(() => {
                 bubble.remove(); // Убираем пузырь после клика
             }, 0);
@@ -179,8 +179,8 @@ function createBubble() {
             totalBubbles++; // Увеличиваем количество собранных пузырей
             localStorage.setItem('score', score); // Сохраняем счет
             localStorage.setItem('totalBubbles', totalBubbles); // Сохраняем собранные пузырь
-            scoreElement.textContent = `Счет: ${score}`;
-            totalBubblesElement.textContent = `Собрано пузырей: ${totalBubbles}`;
+            scoreElement.querySelector('span').textContent = `${caughtBubbles}`;
+            totalBubblesElement.textContent = `${totalBubbles}`;
             setTimeout(() => {
                 bubble.remove(); // Убираем пузырь после клика
             }, 0);
@@ -236,10 +236,10 @@ function startGame() {
 
     // Запускаем таймер на 45 секунд
     gameTime = 45;
-    timerElement.querySelector('span').textContent = `${gameTime} секунд`;
+    timerElement.querySelector('span').textContent = ` 00:${gameTime} `;
     timerInterval = setInterval(() => {
         gameTime--;
-        timerElement.querySelector('span').textContent = `${gameTime} секунд`;
+        timerElement.querySelector('span').textContent = ` 00:${gameTime} `;
         if (gameTime <= 0) {
             clearInterval(timerInterval); // Останавливаем таймер
             endGame();
@@ -261,7 +261,7 @@ function endGame() {
     // Показываем результаты
     document.getElementById('game').style.display = 'none';
     document.getElementById('end-screen').style.display = 'block'; // Показываем экран с результатами
-    document.getElementById('final-score').textContent = `Вы поймали ${caughtBubbles} пузырей!`; // Показываем количество пойманных пузырей
+    document.getElementById('final-score').textContent = `${caughtBubbles}`; // Показываем количество пойманных пузырей
     document.getElementById('best-score').textContent = `Лучший результат: ${bestScore}`;
 }
 
@@ -297,7 +297,7 @@ document.getElementById('resume-btn').addEventListener('click', () => {
     bubbleInterval = setInterval(() => { createBubble(); updateLevel(); }, levelInterval); // Возобновляем создание пузырей
     timerInterval = setInterval(() => { 
         gameTime--; 
-        timerElement.querySelector('span').textContent = `${gameTime} секунд`; 
+        timerElement.querySelector('span').textContent = `00:${gameTime} `;
         if (gameTime <= 0) {
             clearInterval(timerInterval); 
             endGame(); 
