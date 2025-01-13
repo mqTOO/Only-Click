@@ -7,7 +7,7 @@ tg.ready();
 // Включаем полноэкранный режим
 tg.expand();
 
-//tg.requestFullscreen();		// Максимально большой экран
+tg.requestFullscreen();		// Максимально большой экран
 
 // Универсальные функции для анимации
 function showElementWithAnimation(elementId) {
