@@ -13,12 +13,20 @@
     <div id="menu-background"></div> <!-- Фон главного меню -->
     
     <div id="game-container">
-        <!-- Главное меню -->
+        
+			<!-- Экран загрузки -->
+	<div id="loading-screen" class="loading-screen">
+		<div class="loading-spinner"></div>
+		<p>Loading...</p>
+	</div>
+	
+	
+		<!-- Главное меню -->
         <div id="menu">
             <h1>BLYP!</h1>
 			<table>
 				<tr>
-					<td>
+					<td >
 						<div id="total-bubbles">
 							<span>0</span>
 						</div> <!-- Счётчик собранных пузырей с иконкой -->
@@ -41,6 +49,8 @@
 					</td>
 				</tr>
 			</table>
+			
+
         </div>
 
         <!-- Экран рефералов -->
@@ -91,7 +101,10 @@
             
             <h2 id="best-score">Рекорд: 0</h2>
             <button id="restart-btn" onclick="restartGame()">Играть</button>
+			
             <button id="exit-to-menu-btn">Меню</button>
+			<button id="exit-to-menu-btn">Меню</button>
+			<button id="exit-to-menu-btn">Меню</button>
         </div>
     </div>
 
