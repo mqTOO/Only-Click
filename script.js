@@ -7,7 +7,7 @@ tg.ready();
 // Включаем полноэкранный режим
 tg.expand();
 
-tg.requestFullscreen();		// Максимально большой экран
+//tg.requestFullscreen();		// Максимально большой экран
 
 // Универсальные функции для анимации
 function showElementWithAnimation(elementId) {
@@ -77,21 +77,24 @@ const bonusSound = new Audio('sounds/bonus.mp3'); // Путь к звуково�
 const scoreElement = document.getElementById('score');
 const timerElement = document.getElementById('timer');
 const totalBubblesElement = document.getElementById('total-bubbles'); // Элемент для отображения собранных пузырей
+const totalBlypElement = document.getElementById('total-blyp'); // Элемент для отображения собранных пузырей
 
 // Инициализация переменных
 let score = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0;
 let bestScore = localStorage.getItem('bestScore') ? parseInt(localStorage.getItem('bestScore')) : 0;
 let totalBubbles = localStorage.getItem('totalBubbles') ? parseInt(localStorage.getItem('totalBubbles')) : 0; // Счётчик собранных пузырей
+let totalBlyp = localStorage.getItem('totalBlyp') ? parseInt(localStorage.getItem('totalBlyp')) : 0; // Счётчик собранных пузырей блюп
 let level = 1; // Уровень сложности
 let bubbleInterval;
 let bubbleCount = 0; // Счётчик пузырей
 let caughtBubbles = 0; // Счётчик пойманных пузырей
-let gameTime = 45; // Таймер игры, 45 секунд
+let gameTime = 5; // Таймер игры, 45 секунд
 let timerInterval;
 let levelInterval = 500; // Интервал для создания пузырей
 
 // Обновление счётчика собранных пузырей в главном меню
 totalBubblesElement.textContent = `${totalBubbles}`;
+totalBlypElement.textContent = `${totalBlyp}`;
 
 // Функция создания реферальной ссылки
 function generateReferralLink() {
@@ -202,7 +205,7 @@ function createBubble() {
         // Проигрываем звук
         if (isBonus) {
             bonusSound.play(); // Звук бонусного пузыря
-            score += 5; // Добавляем бонусные очки
+            totalBlyp++; // Обычный пузырь увеличивает очки на 1
         } else {
             bubbleSound.play(); // Звук обычного пузыря
             score++; // Обычный пузырь увеличивает очки на 1
@@ -213,8 +216,10 @@ function createBubble() {
         totalBubbles++; // Увеличиваем количество собранных пузырей
         localStorage.setItem('score', score); // Сохраняем счет
         localStorage.setItem('totalBubbles', totalBubbles); // Сохраняем собранные пузырь
+		localStorage.setItem('totalBlyp', totalBlyp);
         scoreElement.querySelector('span').textContent = `${caughtBubbles}`;
         totalBubblesElement.textContent = `${totalBubbles}`;
+		totalBlypElement.textContent = `${totalBlyp}`;
 		
     });
 
@@ -252,8 +257,8 @@ function handleBubbleClick(event) {
     // Плейсинг звуков
     if (bubble.classList.contains('bonus')) {
         bonusSound.play(); // Проигрываем бонусный звук
-        score += 5; // Добавляем бонусные очки
-        caughtBubbles += 5; // Увеличиваем количество пойманных пузырей
+        score += 1; // Добавляем бонусные очки
+        caughtBubbles += 1; // Увеличиваем количество пойманных пузырей
     } else {
         bubbleSound.play(); // Проигрываем обычный звук
         score++; // Обычный пузырь увеличивает очки на 1
@@ -262,10 +267,13 @@ function handleBubbleClick(event) {
 
     // Обновляем счет
     totalBubbles++; // Увеличиваем количество собранных пузырей
+	totalBlyp++;
     localStorage.setItem('score', score); // Сохраняем счет
     localStorage.setItem('totalBubbles', totalBubbles); // Сохраняем собранные пузырь
+	localStorage.setItem('totalBlyp', totalBlyp);
     scoreElement.querySelector('span').textContent = `${caughtBubbles}`;
     totalBubblesElement.textContent = `${totalBubbles}`;
+	totalBlypElement.textContent = `${totalblyp}`;
 }
 
 
@@ -299,7 +307,7 @@ function startGame() {
     }, levelInterval); // Начальный интервал появления пузырей
 
     // Запускаем таймер на 45 секунд
-    gameTime = 45;
+    gameTime = 5;
     timerElement.querySelector('span').textContent = ` 00:${gameTime} `;
     timerInterval = setInterval(() => {
         gameTime--;
@@ -326,7 +334,7 @@ function endGame() {
     document.getElementById('game').style.display = 'none';
     document.getElementById('end-screen').style.display = 'block'; // Показываем экран с результатами
     document.getElementById('final-score').textContent = `${caughtBubbles}`; // Показываем количество пойманных пузырей
-    document.getElementById('best-score').textContent = `Лучший результат: ${bestScore}`;
+    document.getElementById('best-score').textContent = `${bestScore}`;
 }
 
 // Функция для начала новой игры
