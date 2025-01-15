@@ -172,6 +172,10 @@ function createBubble() {
     } else {
         bubble.classList.add('bubble', 'normal'); // Добавляем стиль для обычных пузырей
         bubble.addEventListener('click', () => {
+	    setTimeout(() => {
+                bubble.remove(); // Убираем пузырь после клика
+            }, 0);
+	    bubble.style.pointerEvents = 'none'; // Блокируем клик по пузырю
             bubbleSound.play(); // Проигрываем обычный звук
             score++; // Обычный пузырь увеличивает очки на 1
             caughtBubbles++; // Увеличиваем количество пойманных пузырей
@@ -180,9 +184,7 @@ function createBubble() {
             localStorage.setItem('totalBubbles', totalBubbles); // Сохраняем собранные пузырь
             scoreElement.querySelector('span').textContent = `${caughtBubbles}`;
             totalBubblesElement.textContent = `${totalBubbles}`;
-            setTimeout(() => {
-                bubble.remove(); // Убираем пузырь после клика
-            }, 0);
+
         });
     }
 
