@@ -139,7 +139,6 @@ document.getElementById('back-to-menu-btn').addEventListener('click', () => {
     document.getElementById('menu').style.display = 'block'; // Показываем главное меню
 });
 
-// Функция создания пузыря
 function createBubble() {
     const bubble = document.createElement('div');
     
@@ -155,37 +154,12 @@ function createBubble() {
 
     if (isBonus) {
         bubble.classList.add('bubble', 'bonus'); // Добавляем стиль для бонусных пузырей
-        bubble.addEventListener('click', () => {
-            bubble.style.pointerEvents = 'none'; // Блокируем клик по пузырю
-            bonusSound.play(); // Проигрываем бонусный звук
-            score += 5; // Добавляем бонусные очки
-            caughtBubbles += 5; // Увеличиваем количество пойманных пузырей
-            totalBubbles++; // Увеличиваем количество собранных пузырей
-            localStorage.setItem('score', score); // Сохраняем счет
-            localStorage.setItem('totalBubbles', totalBubbles); // Сохраняем собранные пузырь
-            scoreElement.querySelector('span').textContent = `${caughtBubbles}`;
-            totalBubblesElement.textContent = `${totalBubbles}`;
-            setTimeout(() => {
-                bubble.remove(); // Убираем пузырь после клика
-            }, 0);
-        });
+        bubble.addEventListener('click', handleBubbleClick);
+        bubble.addEventListener('touchstart', handleBubbleClick); // Добавляем событие для мобильных устройств
     } else {
         bubble.classList.add('bubble', 'normal'); // Добавляем стиль для обычных пузырей
-        bubble.addEventListener('click', () => {
-	    setTimeout(() => {
-                bubble.remove(); // Убираем пузырь после клика
-            }, 0);
-	    bubble.style.pointerEvents = 'none'; // Блокируем клик по пузырю
-            bubbleSound.play(); // Проигрываем обычный звук
-            score++; // Обычный пузырь увеличивает очки на 1
-            caughtBubbles++; // Увеличиваем количество пойманных пузырей
-            totalBubbles++; // Увеличиваем количество собранных пузырей
-            localStorage.setItem('score', score); // Сохраняем счет
-            localStorage.setItem('totalBubbles', totalBubbles); // Сохраняем собранные пузырь
-            scoreElement.querySelector('span').textContent = `${caughtBubbles}`;
-            totalBubblesElement.textContent = `${totalBubbles}`;
-
-        });
+        bubble.addEventListener('click', handleBubbleClick);
+        bubble.addEventListener('touchstart', handleBubbleClick); // Добавляем событие для мобильных устройств
     }
 
     // Рассчитываем скорость подъема пузыря
@@ -205,6 +179,41 @@ function createBubble() {
 
     bubbleCount++; // Увеличиваем счетчик пузырей
 }
+
+// Обработчик клика по пузырю
+function handleBubbleClick(event) {
+    // Блокируем клик по пузырю после того как он был пойман
+    event.target.style.pointerEvents = 'none'; // Это предотвратит дополнительные клики по пузырю
+    event.target.removeEventListener('click', handleBubbleClick); // Убираем обработчик
+    event.target.removeEventListener('touchstart', handleBubbleClick); // Убираем обработчик для тач-событий
+
+    const bubble = event.target;
+    bubble.style.pointerEvents = 'none'; // Блокируем дальнейшие клики по пузырю
+
+    // Понижаем шанс исчезновения пузыря и делаем клик более точным
+    setTimeout(() => {
+        bubble.remove(); // Убираем пузырь после клика
+    }, 0); // Убираем мгновенно (можно добавить анимацию исчезновения)
+
+    // Плейсинг звуков
+    if (bubble.classList.contains('bonus')) {
+        bonusSound.play(); // Проигрываем бонусный звук
+        score += 5; // Добавляем бонусные очки
+        caughtBubbles += 5; // Увеличиваем количество пойманных пузырей
+    } else {
+        bubbleSound.play(); // Проигрываем обычный звук
+        score++; // Обычный пузырь увеличивает очки на 1
+        caughtBubbles++; // Увеличиваем количество пойманных пузырей
+    }
+
+    // Обновляем счет
+    totalBubbles++; // Увеличиваем количество собранных пузырей
+    localStorage.setItem('score', score); // Сохраняем счет
+    localStorage.setItem('totalBubbles', totalBubbles); // Сохраняем собранные пузырь
+    scoreElement.querySelector('span').textContent = `${caughtBubbles}`;
+    totalBubblesElement.textContent = `${totalBubbles}`;
+}
+
 
 // Функция для обновления уровня
 function updateLevel() {
@@ -317,3 +326,5 @@ document.getElementById('exit-to-menu-btn').addEventListener('click', () => {
 	speed = 0;
 	bubbleCount = 0;
 });
+
+
