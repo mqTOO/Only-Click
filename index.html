@@ -6,6 +6,19 @@
     <meta name="theme-color" content="#0088cc"> <!-- Цвет для Telegram Web App -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>BLYP Game</title>
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Tiny5&display=swap" rel="stylesheet">
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+	
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -26,13 +39,25 @@
             <h1>BLYP!</h1>
 			<table>
 				<tr>
-					<td >
+					<td>
 						<div id="total-bubbles">
 							<span>0</span>
 						</div> <!-- Счётчик собранных пузырей с иконкой -->
 					</td>
 					<td>
 						<img src="images/bubble-icon.png" alt="Bubble Icon" class="icon-menu">
+					</td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td>
+						<div id="total-blyp">
+							<span>0</span>
+						</div>
+					</td>
+					<td>
+						<img src="images/blyp-icon.png" alt="Bubble Icon" class="icon-menu">
 					</td>
 				</tr>
 				<tr>
@@ -87,6 +112,7 @@
 
         <!-- Экран окончания игры -->
         <div id="end-screen" style="display: none;">
+			<img src="images/beach.gif" alt="ends-gifs" class="end-gif">
             <h2>Великолепно!</h2>
 			<table>
 				<tr>
@@ -98,13 +124,23 @@
 					</td>
 				</tr>
 			</table>
+			<table>	
+				<tr>
+					<td>
+						<h2>Рекорд:</h2>
+					</td>
+					<td>
+						<img src="images/bubble-icon.png" alt="Bubble Icon" class="icon">
+					</td>
+					<td>
+						<h2 id="best-score">Рекорд: 0</h2>
+					</td>
+				</tr>
+			</table>
             
-            <h2 id="best-score">Рекорд: 0</h2>
+            
             <button id="restart-btn" onclick="restartGame()">Играть</button>
 			
-            <button id="exit-to-menu-btn">Меню</button>
-			<button id="exit-to-menu-btn">Меню</button>
-			<button id="exit-to-menu-btn">Меню</button>
         </div>
     </div>
 
