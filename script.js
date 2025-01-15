@@ -172,7 +172,6 @@ function createBubble() {
     } else {
         bubble.classList.add('bubble', 'normal'); // Добавляем стиль для обычных пузырей
         bubble.addEventListener('click', () => {
-            bubble.style.pointerEvents = 'none'; // Блокируем клик по пузырю
             bubbleSound.play(); // Проигрываем обычный звук
             score++; // Обычный пузырь увеличивает очки на 1
             caughtBubbles++; // Увеличиваем количество пойманных пузырей
