@@ -139,10 +139,39 @@ document.getElementById('back-to-menu-btn').addEventListener('click', () => {
     document.getElementById('menu').style.display = 'block'; // Показываем главное меню
 });
 
+// Функция для инициализации игры
+function initializeGame() {
+    // Показываем экран загрузки
+    const loadingScreen = document.getElementById('loading-screen');
+    
+    // Загружаем игру (можно добавить ваши дополнительные шаги, например, загрузку ресурсов)
+    setTimeout(() => {
+        // Когда игра готова, скрываем экран загрузки
+        loadingScreen.style.opacity = '0';
+
+        // Ждем, пока анимация исчезновения загрузочного экрана завершится
+        setTimeout(() => {
+            loadingScreen.style.display = 'none'; // Скрываем экран загрузки полностью
+        }, 500); // Время на завершение анимации исчезновения
+    }, 2000); // Симуляция времени на загрузку (можно заменить на реальную загрузку ресурсов)
+}
+
+// Функция начала игры
+function startGame() {
+    // Тут начинается ваша игра
+    document.getElementById('menu').style.display = 'none';  // Прячем меню
+    document.getElementById('game').style.display = 'block'; // Показываем игру
+    // Остальной код для старта игры
+}
+
+// Вызов функции инициализации игры
+initializeGame();
+
+// Функция создания пузыря
 function createBubble() {
     const bubble = document.createElement('div');
     
-    const size = Math.random() * 30 + 30; // Размер пузыря от 30px до 60px
+    const size = Math.random() * 50 + 30; // Размер пузыря от 30px до 60px
     const leftPosition = Math.random() * 100; // случайное положение по горизонтали
 
     bubble.style.width = `${size}px`;
@@ -154,21 +183,46 @@ function createBubble() {
 
     if (isBonus) {
         bubble.classList.add('bubble', 'bonus'); // Добавляем стиль для бонусных пузырей
-        bubble.addEventListener('click', handleBubbleClick);
-        bubble.addEventListener('touchstart', handleBubbleClick); // Добавляем событие для мобильных устройств
     } else {
         bubble.classList.add('bubble', 'normal'); // Добавляем стиль для обычных пузырей
-        bubble.addEventListener('click', handleBubbleClick);
-        bubble.addEventListener('touchstart', handleBubbleClick); // Добавляем событие для мобильных устройств
     }
 
+    bubble.addEventListener('click', () => {
+        // Активируем анимацию лопанья пузыря
+        bubble.classList.add('pop');
+        
+        // После окончания анимации удаляем пузырь
+        setTimeout(() => {
+            bubble.remove();
+        }, 500); // Время совпадает с длительностью анимации
+
+        // Блокируем повторный клик
+        bubble.style.pointerEvents = 'none'; 
+        
+        // Проигрываем звук
+        if (isBonus) {
+            bonusSound.play(); // Звук бонусного пузыря
+            score += 5; // Добавляем бонусные очки
+        } else {
+            bubbleSound.play(); // Звук обычного пузыря
+            score++; // Обычный пузырь увеличивает очки на 1
+        }
+
+        // Обновляем счёт
+        caughtBubbles++; // Увеличиваем количество пойманных пузырей
+        totalBubbles++; // Увеличиваем количество собранных пузырей
+        localStorage.setItem('score', score); // Сохраняем счет
+        localStorage.setItem('totalBubbles', totalBubbles); // Сохраняем собранные пузырь
+        scoreElement.querySelector('span').textContent = `${caughtBubbles}`;
+        totalBubblesElement.textContent = `${totalBubbles}`;
+		
+    });
+
     // Рассчитываем скорость подъема пузыря
-    const speed = 60; // Начальная скорость 5 секунд, уменьшаем на 0.1 с каждым новым пузырем
-    if (speed < 1) {
-        bubble.style.animationDuration = '1s'; // Минимальное время подъема 1 секунда
-    } else {
-        bubble.style.animationDuration = `${speed}s`; // Устанавливаем уникальное время для каждого пузыря
-    }
+    const minSpeed = 45; // Минимальная скорость подъема
+    const maxSpeed = 60; // Максимальная скорость подъема
+    const speed = Math.random() * (maxSpeed - minSpeed) + minSpeed; // Генерируем случайную скорость между min и max значениями
+    bubble.style.animationDuration = `${speed}s`; // Устанавливаем уникальное время для каждого пузыря
 
     document.getElementById('game').appendChild(bubble);
 
@@ -315,6 +369,8 @@ document.getElementById('resume-btn').addEventListener('click', () => {
     }, 1000); // Возобновляем таймер
 });
 
+
+
 // Обработчик для кнопки "Выход в меню"
 document.getElementById('exit-to-menu-btn').addEventListener('click', () => {
     document.getElementById('pause-screen').style.display = 'none'; // Скрываем экран паузы
@@ -326,5 +382,3 @@ document.getElementById('exit-to-menu-btn').addEventListener('click', () => {
 	speed = 0;
 	bubbleCount = 0;
 });
-
-
