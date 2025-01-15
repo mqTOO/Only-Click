@@ -7,7 +7,7 @@ tg.ready();
 // Включаем полноэкранный режим
 tg.expand();
 
-//tg.requestFullscreen();		// Максимально большой экран
+tg.requestFullscreen();		// Максимально большой экран
 
 // Универсальные функции для анимации
 function showElementWithAnimation(elementId) {
@@ -88,7 +88,7 @@ let level = 1; // Уровень сложности
 let bubbleInterval;
 let bubbleCount = 0; // Счётчик пузырей
 let caughtBubbles = 0; // Счётчик пойманных пузырей
-let gameTime = 5; // Таймер игры, 45 секунд
+let gameTime = 45; // Таймер игры, 45 секунд
 let timerInterval;
 let levelInterval = 500; // Интервал для создания пузырей
 
@@ -307,11 +307,15 @@ function startGame() {
     }, levelInterval); // Начальный интервал появления пузырей
 
     // Запускаем таймер на 45 секунд
-    gameTime = 5;
+    gameTime = 45;
     timerElement.querySelector('span').textContent = ` 00:${gameTime} `;
     timerInterval = setInterval(() => {
         gameTime--;
-        timerElement.querySelector('span').textContent = ` 00:${gameTime} `;
+	if (gameTime <= 9) {
+		timerElement.querySelector('span').textContent = ` 00:0${gameTime} `;
+	} else {
+        	timerElement.querySelector('span').textContent = ` 00:${gameTime} `;
+	}
         if (gameTime <= 0) {
             clearInterval(timerInterval); // Останавливаем таймер
             endGame();
