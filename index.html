@@ -37,6 +37,7 @@
 		<!-- Главное меню -->
         <div id="menu">
             <h1>BLYP!</h1>
+
 			<table>
 				<tr>
 					<td>
@@ -68,6 +69,44 @@
 			</table>
 			<table>
 				<tr>
+					<td>
+						<div id="tickets">
+							<span>0</span>
+						</div>
+					</td>
+					<td>
+						<img src="images/ticket-icon.png" alt="Bubble Icon" class="icon-tickets-menu">
+					</td>
+			</table>
+
+			
+			<table>
+				<tr>
+					<td>
+												<!-- Кнопка получения билета -->
+						<button id="get-ticket-btn" class="progress-button">
+						<table>
+
+							<tr>
+								<td>
+									<h2>+5</h2>
+								</td>
+								<td>
+									<img src="images/ticket-icon.png" alt="Bubble Icon" class="icon-tickets-menu">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span id="ticket-timer">00:00:00</span> <!-- Время до получения билета -->
+								</td>
+							</tr>
+
+						</table>
+							
+						</button>
+					</td>
+				</tr>
+				<tr>
 					<td>	
 						<button id="start-btn">Играть</button>
 						<button id="referral-btn">Друзья</button> <!-- Кнопка рефералов -->
@@ -77,7 +116,6 @@
 			
 
         </div>
-
         <!-- Экран рефералов -->
         <div id="referral-screen" style="display: none;">
             <h2>Реферальная ссылка</h2>
@@ -142,6 +180,8 @@
             <button id="restart-btn" onclick="restartGame()">Играть</button>
 			
         </div>
+		
+
     </div>
 
     <!-- Подключение Telegram Web App SDK -->
