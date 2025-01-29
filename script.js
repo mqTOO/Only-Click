@@ -36,12 +36,122 @@ function hideElementWithAnimation(elementId) {
     }, 400); // Время совпадает с animation-duration
 }
 
+// Инициализация переменных для билетов
+let tickets = localStorage.getItem('tickets') ? parseInt(localStorage.getItem('tickets')) : 0;
+let lastTicketTime = localStorage.getItem('lastTicketTime') ? parseInt(localStorage.getItem('lastTicketTime')) : 0;
+const TICKET_COST = 1; // Стоимость одного билета для игры
+const TICKETS_PER_DAY = 5; // Количество билетов, которые можно получить за день
+const TICKET_COOLDOWN = 24 * 60 * 60 * 1000;; // 24 часа в миллисекундах
+
+// Элементы UI
+const ticketsElement = document.getElementById('tickets');
+const ticketTimerElement = document.getElementById('ticket-timer'); // Элемент для отображения таймера на кнопке
+const progressButton = document.getElementById('get-ticket-btn'); // Кнопка для получения билета
+const progressBar = document.createElement('div'); // Элемент для прогресс-бара
+let ticketInterval; // Убедитесь, что переменная ticketInterval объявлена глобальн
+
+// Добавляем элемент прогресса внутрь кнопки
+progressBar.classList.add('progress-bar');
+progressButton.appendChild(progressBar);
+
+// Обновляем количество билетов на экране
+ticketsElement.textContent = `${tickets}`;
+
+function resetTicketTimer() {
+        // Сбросить текущий интервал
+    clearInterval(ticketInterval);
+
+        // Перезапустить отсчёт с нуля
+    const currentTime = Date.now();
+    lastTicketTime = currentTime;
+    localStorage.setItem('lastTicketTime', currentTime);
+
+        // Перезапустить таймер
+    ticketInterval = setInterval(function () {
+        const remainingTimeInSeconds = Math.ceil((TICKET_COOLDOWN - (Date.now() - lastTicketTime)) / 1000);
+        updateTicketProgress(remainingTimeInSeconds);
+    }, 1000);
+}
+// Функция для получения билетов
+function getTickets() {
+    const currentTime = Date.now();
+
+    // Проверяем, прошли ли 24 часа с последнего получения билетов
+    if (currentTime - lastTicketTime >= TICKET_COOLDOWN) {
+        tickets += TICKETS_PER_DAY;
+        localStorage.setItem('tickets', tickets); // Сохраняем количество билетов
+        localStorage.setItem('lastTicketTime', currentTime); // Сохраняем время последнего получения билетов
+        ticketsElement.textContent = `${tickets}`;
+        alert(`Вы получили ${TICKETS_PER_DAY} билетов!`);
+		
+		// Перезапуск таймера
+        resetTicketTimer();
+    } else {
+        const remainingTime = Math.ceil((TICKET_COOLDOWN - (currentTime - lastTicketTime)) / 1000);
+        updateTicketProgress(remainingTime);
+        alert(`Следующие билеты будут доступны через ${remainingTime} секунд.`);
+    }
+}
+
+// Обработчик кнопки "Получить билет"
+document.getElementById('get-ticket-btn').addEventListener('click', getTickets);
+
+// Функция для обновления прогресса на кнопке
+function updateTicketProgress(remainingTimeInSeconds) {
+    const remainingTime = remainingTimeInSeconds * 1000; // Переводим время в миллисекунды
+    const progressWidth = (1 - remainingTime / TICKET_COOLDOWN) * 100; // Вычисляем процент заполняемости
+    progressBar.style.width = `${progressWidth}%`;
+
+    // Вычисляем оставшееся время в формате ЧЧ:ММ:СС
+    const hours = Math.floor(remainingTimeInSeconds / 3600);
+    const minutes = Math.floor((remainingTimeInSeconds % 3600) / 60);
+    const seconds = remainingTimeInSeconds % 60;
+    ticketTimerElement.textContent = `${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
+}
+
+// Функция для добавления ведущих нулей к числам
+function padZero(num) {
+    return num < 10 ? `0${num}` : num;
+}
+
+// Функция для обновления кнопки старта
+function updateStartButton() {
+    if (tickets <= 0) {
+        progressButton.disabled = true; // Отключаем кнопку
+        progressButton.title = 'У вас нет билетов для игры'; // Подсказка
+    } else {
+        progressButton.disabled = false; // Включаем кнопку
+        progressButton.title = ''; // Убираем подсказку
+    }
+}
+
+
+
+// Функция для обновления состояния кнопки с прогрессом
+function updateTicketButton() {
+    const currentTime = Date.now();
+    if (currentTime - lastTicketTime >= TICKET_COOLDOWN) {
+        progressBar.style.width = '100%'; // Прогресс заполнен
+        ticketTimerElement.textContent = '00:00:00'; // Время до получения билетов = 0
+    } else {
+        const remainingTimeInSeconds = Math.ceil((TICKET_COOLDOWN - (currentTime - lastTicketTime)) / 1000);
+        updateTicketProgress(remainingTimeInSeconds);
+    }
+}
+
+// Обновляем состояние кнопки каждую секунду
+setInterval(updateTicketButton, 1000);
 
 // Обработчики кнопок
-document.getElementById('start-btn').addEventListener('click', () => {
-    hideElementWithAnimation('menu');
-    showElementWithAnimation('game');
-});
+
+	if (tickets >= TICKET_COST) {
+		document.getElementById('start-btn').addEventListener('click', () => {
+			hideElementWithAnimation('menu');
+			showElementWithAnimation('game');
+		});
+	} else {
+	}
+
 
 document.getElementById('referral-btn').addEventListener('click', () => {
     hideElementWithAnimation('menu');
@@ -52,6 +162,7 @@ document.getElementById('back-to-menu-btn').addEventListener('click', () => {
     hideElementWithAnimation('referral-screen');
     showElementWithAnimation('menu');
 });
+
 
 document.getElementById('pause-btn').addEventListener('click', () => {
     hideElementWithAnimation('game');
@@ -88,7 +199,7 @@ let level = 1; // Уровень сложности
 let bubbleInterval;
 let bubbleCount = 0; // Счётчик пузырей
 let caughtBubbles = 0; // Счётчик пойманных пузырей
-let gameTime = 45; // Таймер игры, 45 секунд
+let gameTime = 5; // Таймер игры, 45 секунд
 let timerInterval;
 let levelInterval = 500; // Интервал для создания пузырей
 
@@ -159,13 +270,7 @@ function initializeGame() {
     }, 2000); // Симуляция времени на загрузку (можно заменить на реальную загрузку ресурсов)
 }
 
-// Функция начала игры
-function startGame() {
-    // Тут начинается ваша игра
-    document.getElementById('menu').style.display = 'none';  // Прячем меню
-    document.getElementById('game').style.display = 'block'; // Показываем игру
-    // Остальной код для старта игры
-}
+
 
 // Вызов функции инициализации игры
 initializeGame();
@@ -286,43 +391,51 @@ function updateLevel() {
     }
 }
 
-// Функция начала игры
+// Функция для начала игры
 function startGame() {
-    document.getElementById('menu').style.display = 'none';  // Скрываем меню
-    document.getElementById('game').style.display = 'block';  // Показываем игру
-	
-	caughtBubbles = 0;
-	level = 0;
-	speed = 0;
-	bubbleCount = 0;
-	
-    // Переключаем фоны
-    document.getElementById('game-background').style.display = 'block'; // Показываем фон игры
-    document.getElementById('menu-background').style.display = 'none'; // Скрываем фон меню
+    if (tickets <= 0) {
+		
+		document.getElementById('menu').style.display = 'none';
+		document.getElementById('notickets').style.display = 'block';
+		
+    } else {
 
-    // Запускаем создание пузырей с начальным интервалом
-    bubbleInterval = setInterval(() => {
-        createBubble();
-        updateLevel();
-    }, levelInterval); // Начальный интервал появления пузырей
+		tickets -= TICKET_COST; // Снижаем количество билетов
+		if (tickets < 0) {
+			tickets = 0; // Убеждаемся, что количество билетов не станет отрицательным
+		}
+		
+		    // Переключаем фоны
+		document.getElementById('game-background').style.display = 'block'; // Показываем фон игры
+		document.getElementById('menu-background').style.display = 'none'; // Скрываем фон меню
 
-    // Запускаем таймер на 45 секунд
-    gameTime = 45;
-    timerElement.querySelector('span').textContent = ` 00:${gameTime} `;
-    timerInterval = setInterval(() => {
-        gameTime--;
-	if (gameTime <= 9) {
-		timerElement.querySelector('span').textContent = ` 00:0${gameTime} `;
-	} else {
-        	timerElement.querySelector('span').textContent = ` 00:${gameTime} `;
+		localStorage.setItem('tickets', tickets); // Сохраняем количество билетов в localStorage
+		ticketsElement.textContent = `${tickets}`; // Обновляем отображение количества билетов
+
+		document.getElementById('menu').style.display = 'none';
+		document.getElementById('game').style.display = 'block';
+
+		caughtBubbles = 0;
+		level = 1;
+		bubbleCount = 0;
+		gameTime = 45;
+
+		bubbleInterval = setInterval(() => {
+			createBubble();
+			updateLevel();
+		}, levelInterval);
+
+		timerElement.querySelector('span').textContent = `00:${gameTime}`;
+		timerInterval = setInterval(() => {
+			gameTime--;
+			timerElement.querySelector('span').textContent = `00:${gameTime}`;
+			if (gameTime <= 0) {
+				clearInterval(timerInterval);
+				endGame();
+			}
+		}, 1000);
 	}
-        if (gameTime <= 0) {
-            clearInterval(timerInterval); // Останавливаем таймер
-            endGame();
-        }
-    }, 1000);
 }
-
 // Конец игры
 function endGame() {
     clearInterval(bubbleInterval); // Останавливаем создание пузырей
@@ -341,6 +454,17 @@ function endGame() {
     document.getElementById('best-score').textContent = `${bestScore}`;
 }
 
+function updateStartButton() {
+    if (tickets <= 0) {
+        document.getElementById('start-btn').disabled = true; // Отключаем кнопку
+        document.getElementById('start-btn').title = 'У вас нет билетов для игры'; // Подсказка
+    } else {
+        document.getElementById('start-btn').disabled = false; // Включаем кнопку
+        document.getElementById('start-btn').title = ''; // Убираем подсказку
+    }
+}
+// Вызов функции обновления кнопки старта при загрузке страницы
+updateStartButton();
 // Функция для начала новой игры
 function restartGame() {
     score = 0;
@@ -356,7 +480,11 @@ function restartGame() {
 }
 
 // Обработчики событий для кнопки "Начать игру"
-document.getElementById('start-btn').addEventListener('click', startGame);
+if (tickets >= TICKET_COST) {
+	document.getElementById('start-btn').addEventListener('click', startGame);
+} else {
+	
+}
 
 // Обработчики событий для кнопки паузы
 document.getElementById('pause-btn').addEventListener('click', () => {
@@ -393,4 +521,23 @@ document.getElementById('exit-to-menu-btn').addEventListener('click', () => {
 	level = 0;
 	speed = 0;
 	bubbleCount = 0;
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Логирование, чтобы убедиться, что DOM загружен
+    console.log('DOM полностью загружен');
+    
+    const ticketsElement = document.getElementById('tickets');
+    const ticketTimerElement = document.getElementById('ticket-timer');
+    const progressButton = document.getElementById('get-ticket-btn');
+    
+    // Проверим, что все элементы найдены
+    console.log(ticketsElement, ticketTimerElement, progressButton);
+
+    if (!ticketTimerElement) {
+        console.error("Ошибка: Элемент с id 'ticket-timer' не найден!");
+        return; // Прерываем выполнение, если элемент не найден
+    }
+
+    // Ваш остальной код
 });
